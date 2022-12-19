@@ -31,6 +31,13 @@ class WarehouseRepository extends BaseRepository implements RepositoryInterface
                     ->update($value);
     }
 
+    public function get_all_hítory(){
+        return DB::table('warehouse_history')
+                    ->select("warehouse_history.*", "product.name as product_name", "branch.name as branch_name")
+                    ->leftjoin('product', 'product.id', '=', "warehouse_history.product_id")
+                    ->leftjoin('branch', 'branch.id', '=', "warehouse_history.branch_id")
+                    ->get(); 
+    }
 
 
 

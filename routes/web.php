@@ -16,6 +16,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'Customer\DisplayController@index')->name('customer.view.index');
 Route::get('/login', 'Customer\DisplayController@login')->name('customer.view.login');
 Route::get('/register', 'Customer\DisplayController@register')->name('customer.view.register');
+Route::get('/about', 'Customer\DisplayController@about')->name('customer.view.about');
+Route::get('/category', 'Customer\DisplayController@category')->name('customer.view.category');
+Route::get('/product', 'Customer\DisplayController@product')->name('customer.view.product');
+Route::get('/news', 'Customer\DisplayController@news')->name('customer.view.news');
+Route::get('/contact', 'Customer\DisplayController@contact')->name('customer.view.contact');
 
 Route::middleware(['AuthAdmin:auth'])->group(function () {
     Route::prefix('admin')->group(function () {
@@ -83,7 +88,7 @@ Route::middleware(['AuthAdmin:admin'])->group(function () {
         });
         
         Route::prefix('warehouse')->group(function () {
-            Route::get('/get', 'Admin\WarehouseController@get')->name('admin.warehouse.get');
+            Route::get('/get-history', 'Admin\WarehouseController@get_history')->name('admin.warehouse.history.get');
             Route::post('/store', 'Admin\WarehouseController@store')->name('admin.warehouse.store');
             Route::get('/get-one/{id}', 'Admin\WarehouseController@get_one')->name('admin.warehouse.get_one');
             Route::post('/update', 'Admin\WarehouseController@update')->name('admin.warehouse.update');

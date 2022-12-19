@@ -3,9 +3,10 @@ const View = {
         __generateDTRow(data){ 
             return [
                 `<div class="id-order">${data.id}</div>`,
-                data.name,   
-                data.address,   
-                `<label class="switch" data-id="${data.id}" atr="Status"> <span class="slider round ${data.status == '1' ? 'active' : ''}"></span> </label>`,
+                data.branch_name,   
+                data.product_name,   
+                data.quantity,   
+                data.prices,   
                 `<div class="view-data tab-action" atr="View" style="cursor: pointer" data-id="${data.id}"><i class="anticon anticon-edit"></i></div>
                 <div class="view-data tab-action" atr="Delete" style="cursor: pointer" data-id="${data.id}"><i class="anticon anticon-delete"></i></div>`
             ]
@@ -19,21 +20,26 @@ const View = {
                         width: '10%',
                     },
                     {
-                        title: 'Tên',
+                        title: 'Chi nhánh',
                         name: 'name',
                         orderable: true,
                         width: '10%',
                     },
                     {
-                        title: 'Địa chỉ',
+                        title: 'Tên sản phẩm',
                         name: 'name',
                         orderable: true, 
                     }, 
                     {
-                        title: 'Trạng thái',
-                        name: 'image',
-                        orderable: true,
-                    },   
+                        title: 'Số lượng',
+                        name: 'name',
+                        orderable: true, 
+                    }, 
+                    {
+                        title: 'Giá nhập',
+                        name: 'name',
+                        orderable: true, 
+                    }, 
                     {
                         title: 'Hành động',
                         name: 'Action',
@@ -353,7 +359,7 @@ const View = {
     }, 500));
 
     function getData(){
-        Api.Branch.GetAll()
+        Api.Warehouse.GetAll()
             .done(res => {
                 IndexView.table.clearRows();
                 Object.values(res.data).map(v => {

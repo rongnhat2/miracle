@@ -122,10 +122,10 @@
                                         <div class="menu-content">
                                             <ul class="mainmenu">
                                                 <li><a href="/">Home</a></li>
-                                                <li><a href="contact.html">About Us</a></li>
-                                                <li><a href="contact.html">Product</a></li>
-                                                <li><a href="contact.html">News</a></li>
-                                                <li><a href="contact.html">Contact</a></li>
+                                                <li><a href="/about">About Us</a></li>
+                                                <li><a href="/category">Product</a></li>
+                                                <li><a href="/news">News</a></li>
+                                                <li><a href="/contact">Contact</a></li>
                                             </ul> <!-- /.menu-list -->
                                         </div> <!-- /.hours-content-->
                                     </div><!-- /.menu-wrapper -->

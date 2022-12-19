@@ -41,8 +41,13 @@
                             <div class="register-bg-left bg-image" style="background-image:url('{{ asset("customer/assets/images/bg/register-bg-left.jpg") }}')"></div>
                             <div class="form-content">
                                 <div class="form-content-signin">
-                                    <h3 class="form-heading">Log in your account</h3>
+                                    <h3 class="form-heading">Register your account</h3>
                                     <form class="default-form signin-form">
+                                        <div class="form-group">
+                                            <input id="name" name="name" class="form-controllar" type="text" placeholder="Username">
+                                        </div>
+                                        <!--/.form-group-->
+
                                         <div class="form-group">
                                             <input id="email" name="email" class="form-controllar" type="email" placeholder="E-mail Address">
                                         </div>
@@ -55,10 +60,10 @@
 
                                         <div class="form-btn-group">
                                             <button type="submit" class="btn btn-default">
-                                                sign in
+                                                Register
                                             </button>
                                             <div class="forget-pass">
-                                                Register? Please <a class="btn-password" href="{{ route("customer.view.register") }}">click here</a>
+                                                <a class="btn-password" href="{{ route("customer.view.login") }}">Login</a>
                                             </div>
                                         </div>
                                         <div class="form-btn-group">

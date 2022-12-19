@@ -27,9 +27,9 @@ class WarehouseController extends Controller
     public function index(){
         return view("admin.manager.warehouse");
     }
-    public function get(){
-        $data = $this->product->get_all();
-        return $this->product->send_response(201, $data, null);
+    public function get_history(){
+        $data = $this->warehouseHistory->get_all_hítory();
+        return $this->warehouseHistory->send_response(201, $data, null);
     }
     public function get_one($id){
         $data       = $this->event->get_one($id);

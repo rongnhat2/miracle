@@ -111,7 +111,7 @@ const Api = {
 //Warehouse
 (() => {
     Api.Warehouse.GetAll = () => $.ajax({
-        url: `/apip/warehouse/get`,
+        url: `/apip/warehouse/get-history`,
         method: 'GET',
     }); 
     Api.Warehouse.Store = (data) => $.ajax({
