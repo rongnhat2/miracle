@@ -4,6 +4,7 @@ const View = {
             return [
                 `<div class="id-order">${data.id}</div>`,
                 data.name,  
+                data.prices,  
                 `<img src="/${data.image}" style="width:200px" alt="">`,   
                 `<label class="switch" data-id="${data.id}" atr="Status"> <span class="slider round ${data.status == '1' ? 'active' : ''}"></span> </label>`,
                 `<div class="view-data tab-action" atr="View" style="cursor: pointer" data-id="${data.id}"><i class="anticon anticon-edit"></i></div>
@@ -20,6 +21,12 @@ const View = {
                     },
                     {
                         title: 'Tên',
+                        name: 'name',
+                        orderable: true,
+                        width: '10%',
+                    },
+                    {
+                        title: 'Đơn giá',
                         name: 'name',
                         orderable: true,
                         width: '10%',
