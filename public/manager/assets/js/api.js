@@ -110,7 +110,11 @@ const Api = {
 
 //Warehouse
 (() => {
-    Api.Warehouse.GetAll = () => $.ajax({
+    Api.Warehouse.GetDataItem = () => $.ajax({
+        url: `/apip/warehouse/get-item`,
+        method: 'GET',
+    });
+    Api.Warehouse.GetDataHistory = () => $.ajax({
         url: `/apip/warehouse/get-history`,
         method: 'GET',
     }); 
@@ -122,18 +126,7 @@ const Api = {
         processData: false,
     });
     Api.Warehouse.getOne = (id) => $.ajax({
-        url: `/apip/warehouse/get-one/${id}`,
-        method: 'GET',
-    });
-    Api.Warehouse.Update = (data) => $.ajax({
-        url: `/apip/warehouse/update`,
-        method: 'POST',
-        data: data,
-        contentType: false,
-        processData: false,
-    });
-    Api.Warehouse.Delete = (id) => $.ajax({
-        url: `/apip/warehouse/delete/${id}`,
+        url: `/apip/warehouse/get-ware-one/${id}`,
         method: 'GET',
     });
 })();

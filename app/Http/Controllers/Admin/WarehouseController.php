@@ -27,9 +27,31 @@ class WarehouseController extends Controller
     public function index(){
         return view("admin.manager.warehouse");
     }
+    public function get_item(){
+        $data = $this->warehouseHistory->get_item_all();
+        return  $this->warehouseHistory->send_response(201, $data, null);;
+    }
     public function get_history(){
         $data = $this->warehouseHistory->get_all_hítory();
         return $this->warehouseHistory->send_response(201, $data, null);
+    }
+    
+    // public function get_history(){
+    //     $data_full = $this->warehouseHistory->get_history_all();
+    //     $data = [];
+    //     foreach ($data_full as $key => $value) {
+    //         $history_detail = $this->warehouseHistory->get_history_detail($value->id);
+    //         $data_sub = [
+    //             "history"           => $value,
+    //             "history_detail"    => $history_detail,
+    //         ];
+    //         array_push($data, $data_sub);
+    //     }
+    //     return  $this->warehouseHistory->send_response(201, $data, null);;
+    // }
+    public function get_ware_one($id){
+        $data = $this->warehouseHistory->get_ware_one($id);
+        return  $this->warehouseHistory->send_response(201, $data, null);;
     }
     public function get_one($id){
         $data       = $this->event->get_one($id);

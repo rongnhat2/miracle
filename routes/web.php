@@ -88,7 +88,12 @@ Route::middleware(['AuthAdmin:admin'])->group(function () {
         });
         
         Route::prefix('warehouse')->group(function () {
-            Route::get('/get-history', 'Admin\WarehouseController@get_history')->name('admin.warehouse.history.get');
+            Route::get('get-item', 'Admin\WarehouseController@get_item')->name('admin.warehouse.item.get');
+            Route::get('get-history', 'Admin\WarehouseController@get_history')->name('admin.warehouse.history.get');
+            Route::get('get-order-fullfil', 'Admin\WarehouseController@get_order_fullfil')->name('admin.warehouse.item.get');
+            Route::get('get-order-export', 'Admin\WarehouseController@get_order_export')->name('admin.warehouse.item.get');
+            Route::get('get-order-shipping', 'Admin\WarehouseController@get_order_shipping')->name('admin.warehouse.item.get');
+            
             Route::post('/store', 'Admin\WarehouseController@store')->name('admin.warehouse.store');
             Route::get('/get-one/{id}', 'Admin\WarehouseController@get_one')->name('admin.warehouse.get_one');
             Route::post('/update', 'Admin\WarehouseController@update')->name('admin.warehouse.update');

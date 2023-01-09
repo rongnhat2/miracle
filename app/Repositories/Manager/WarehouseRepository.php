@@ -27,7 +27,10 @@ class WarehouseRepository extends BaseRepository implements RepositoryInterface
     }
     public function update_quantity($branch_id, $id, $value){
         return DB::table('warehouse')
-                    ->where([["branch_id", "=", $branch_id], ["product_id", "=", $id]])
+                    ->where([
+                                ["branch_id", "=", $branch_id], 
+                                ["product_id", "=", $id]
+                            ])
                     ->update($value);
     }
 
@@ -39,71 +42,12 @@ class WarehouseRepository extends BaseRepository implements RepositoryInterface
                     ->get(); 
     }
 
-
-
-    public function update_trending($id){
-        $sql = 'UPDATE event set status = !status WHERE id = '.$id;
-        DB::select($sql);
-    }
- 
-    public function get_item_all($request){
-        $lang = $request->lang;
-        return DB::table('event')
-                    ->select("event.id", 
-                            "event.executive_id", 
-                            "event.image", 
-                            "event.status", 
-                            "event.created_at", 
-                            "event_lang.lang_id", 
-                            "event_lang.title", 
-                            "event_lang.description", 
-                            "event_lang.detail")
-                    ->leftjoin("event_lang", "event_lang.event_id", "=", "event.id")
-                    ->where("event_lang.lang_id", "=", $lang == "en" ? 1 : 2)
-                    ->orderBy('event.created_at', 'DESC')
+    public function get_item_all(){
+        return DB::table('warehouse')
+                    ->select("warehouse.*", "product.name as product_name", "product.prices as product_prices", "product.prices as product_prices")
+                    ->leftjoin('product', 'product.id', '=', "warehouse.product_id")
                     ->get(); 
     }
-    public function get_item($request){
-        $item = $request->item;
-        $lang = $request->lang;
-        return DB::table('event')
-                    ->select("event.id", 
-                            "event.executive_id", 
-                            "event.image", 
-                            "event.link_url", 
-                            "event.status", 
-                            "event.created_at", 
-                            "event_lang.lang_id", 
-                            "event_lang.title", 
-                            "event_lang.description", 
-                            "event_lang.detail")
-                    ->leftjoin("event_lang", "event_lang.event_id", "=", "event.id")
-                    ->where("event_lang.lang_id", "=", $lang == "en" ? 1 : 2)
-                    ->orderBy('event.created_at', 'DESC')
-                    ->get($item); 
-    }
-    public function get_detail($request){
-        $id = $request->id;
-        $lang = $request->lang;
-        return DB::table('event')
-                    ->select("event.id", 
-                            "event.executive_id", 
-                            "event.image", 
-                            "event.link_url", 
-                            "event.status", 
-                            "event.created_at", 
-                            "event_lang.lang_id", 
-                            "event_lang.title", 
-                            "event_lang.description", 
-                            "event_lang.detail",
-                            "executive.image as executive_image", 
-                            "executive_lang.name as executive_name",
-                            "executive_lang.position as executive_position" )
-                    ->leftjoin("event_lang", "event_lang.event_id", "=", "event.id")
-                    ->leftjoin("executive", "event.executive_id", "=", "executive.id")
-                    ->leftjoin("executive_lang", "executive_lang.executive_id", "=", "executive.id")
-                    ->where([["event_lang.lang_id", "=", $lang == "en" ? 1 : 2], ["event.id", "=", $id], ["executive_lang.lang_id", "=", $lang == "en" ? 1 : 2]])
-                    ->orderBy('event.created_at', 'DESC')
-                    ->first(); 
-    }
+
+
 }

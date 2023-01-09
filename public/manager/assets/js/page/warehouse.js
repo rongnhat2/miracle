@@ -1,14 +1,50 @@
 const View = {
-    table: {
-        __generateDTRow(data){ 
+    tableData: {
+        __generateDTRow(data){
             return [
-                `<div class="id-order">${data.id}</div>`,
+                data.product_id,
+                data.product_name,
+                IndexView.table.formatNumber(data.quantity),
+                IndexView.table.formatNumber(data.product_prices) + `$`,
+            ]
+        },
+        init(){
+            var row_table = [
+                    {
+                        title: 'ID',
+                        name: 'name',
+                        orderable: true,
+                        width: '5%',
+                    },
+                    {
+                        title: 'Tên sản phẩm',
+                        name: 'name',
+                        orderable: true,
+                    },
+                    {
+                        title: 'Tổng số lượng',
+                        name: 'name',
+                        orderable: true,
+                    },
+                    {
+                        title: 'Giá bán lẻ',
+                        name: 'name',
+                        orderable: true,
+                    },
+                ];
+            IndexView.table.init("#data-table", row_table);
+        }
+    },
+    tableHistory: {
+        __generateDTRow(data){
+            return [
+                data.id,   
                 data.branch_name,   
                 data.product_name,   
                 data.quantity,   
-                data.prices,   
-                `<div class="view-data tab-action" atr="View" style="cursor: pointer" data-id="${data.id}"><i class="anticon anticon-edit"></i></div>
-                <div class="view-data tab-action" atr="Delete" style="cursor: pointer" data-id="${data.id}"><i class="anticon anticon-delete"></i></div>`
+                IndexView.table.formatNumber(data.prices) + ` đ`,
+                `<span class="badge badge-pill badge-${data.history_status == 1 ? "green" : "red"} m-r-5 m-b-5">${data.history_status == 1 ? "Nhập kho" : "Xuất kho"}</span>`,
+                `<div class="view-data modal-fs-control" style="cursor: pointer" atr="View" data-id="${data.id}"><i class="anticon anticon-eye"></i></div>`
             ]
         },
         init(){
@@ -41,6 +77,11 @@ const View = {
                         orderable: true, 
                     }, 
                     {
+                        title: 'Trạng thái',
+                        name: 'name',
+                        orderable: true, 
+                    }, 
+                    {
                         title: 'Hành động',
                         name: 'Action',
                         orderable: true,
@@ -49,7 +90,7 @@ const View = {
                 ];
             IndexView.table.init("#data-table", row_table);
         }
-    }, 
+    },
     TabData: {
         onChange(name, callback){
             $(document).on('click', `.status-event`, function() {
@@ -245,24 +286,24 @@ const View = {
     },
     init(){
         View.Layout.init();
-        View.table.init(); 
+        View.tableHistory.init();
     }
 };
 (() => {
     View.init();
     function init(){
-        getData(); 
+        getHistory(); 
         getBranch(); 
         getProduct(); 
     }
 
     View.TabData.onChange("Item", () => {
-        // View.tableData.init();
-        // getData()
+        View.tableData.init();
+        getData();
     })
     View.TabData.onChange("History", () => {
-        // View.tableHistory.init();
-        // getHistory()
+        View.tableHistory.init();
+        getHistory();
     })
 
 
@@ -289,7 +330,7 @@ const View = {
             Api.Warehouse.Store(fd)
                 .done(res => { 
                     IndexView.helper.showToastSuccess('Success', 'Thành công');
-                    getData();
+                    getHistory();
                 })
                 .fail(err => { IndexView.helper.showToastError('Error', 'Có lỗi sảy ra'); })
                 .always(() => { });
@@ -323,27 +364,7 @@ const View = {
                 .fail(err => { IndexView.helper.showToastError('Error', 'Có lỗi sảy ra'); })
                 .always(() => { });
         }
-    })
-
-    // Delete
-    View.FullTab.onShow("Delete", (id) => {
-        View.FullTab.doShow("Delete");
-        View.FullTab.Delete.init("Delete"); 
-        View.FullTab.Delete.setVal("#popup-delete", id)
-    })
-    View.FullTab.onPush("Delete", "#popup-delete", () => {
-        View.FullTab.doShow("Table");
-        View.FullTab.default();
-        IndexView.helper.showToastProcessing('Process', 'Đang xử lí');
-        Api.Branch.Delete($("#popup-delete").find('.data-id').val())
-            .done(res => { 
-                IndexView.helper.showToastSuccess('Success', 'Thành công');
-                getData();
-            })
-            .fail(err => { IndexView.helper.showToastError('Error', 'Có lỗi sảy ra'); })
-            .always(() => { });
-
-    })
+    }) 
 
     IndexView.table.onSwitch(debounce((item) => {
         Api.Branch.Trending(item.attr('data-id'))
@@ -359,18 +380,31 @@ const View = {
     }, 500));
 
     function getData(){
-        Api.Warehouse.GetAll()
+        Api.Warehouse.GetDataItem()
             .done(res => {
                 IndexView.table.clearRows();
                 Object.values(res.data).map(v => {
-                    IndexView.table.insertRow(View.table.__generateDTRow(v));
+                    IndexView.table.insertRow(View.tableData.__generateDTRow(v));
                     IndexView.table.render();
                 })
                 IndexView.table.render();
             })
             .fail(err => { IndexView.helper.showToastError('Error', 'Có lỗi sảy ra'); })
             .always(() => { });
-    } 
+    }
+    function getHistory(){
+        Api.Warehouse.GetDataHistory()
+            .done(res => {
+                IndexView.table.clearRows();
+                Object.values(res.data).map(v => {
+                    IndexView.table.insertRow(View.tableHistory.__generateDTRow(v));
+                    IndexView.table.render();
+                })
+                IndexView.table.render();
+            })
+            .fail(err => { IndexView.helper.showToastError('Error', 'Có lỗi sảy ra'); })
+            .always(() => { });
+    }
     function getBranch(){
         Api.Branch.GetAll()
             .done(res => { 
