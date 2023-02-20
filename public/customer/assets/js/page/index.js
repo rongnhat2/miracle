@@ -56,6 +56,47 @@ const View = {
             });
         }
     },
+    Product: {
+        bestDiscount(data){
+            $(".best-discount-item")
+                .append(`<div class="special-food-bg bg-image" style="background-image:url('${data.image}')"></div>
+                        <div class="special-food-content-inner">
+                            <div class="special-food-content-text">
+                                <h3 class="food-title">${data.name}</h3>
+                                <div class="food-price"><del>${data.prices}$</del> ${data.prices - (data.prices * data.percent / 100)}$</div>
+                                <p>${data.description}</p>
+                                <div class="btn-group-default">
+                                    <a href="/product/${data.id}-${data.slug}" class="btn btn-default btn-black">VIEW PRODUCT</a>
+                                    <a href="#" class="btn btn-default">ADD TO CART</a>
+                                </div>
+                            </div>
+                        </div>`)
+        },
+        newItem(data){
+            data.map(v => {
+                $('.data-new-item')
+                    .append(`<div class="col-lg-6">
+                                <div class="food-grid-item grid-style-five gird-style">
+                                    <div class="food-thumb">
+                                        <img src="${v.data_product.image}">
+                                    </div>
+                                    <div class="food-info">
+                                        <h3 class="food-title"><a href="/product/${v.data_product.id}-${v.data_product.slug}">Mozzarella Sticks</a>
+                                        </h3>
+                                        <div class="food-footer-info">
+                                            <div class="food-price">${v.data_product.prices}$</div>
+                                        </div>
+                                        <div class="food-info-content">
+                                            <p>${v.data_product.description}</p>
+                                            <a class="read-more" href="/product/${v.data_product.id}-${v.data_product.slug}">Buy now <span class="icon-next4"></span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>`) 
+            })
+           
+        }
+    },
     init(){
 
     }
@@ -64,6 +105,8 @@ const View = {
     View.init();
     function init(){
         getCategory();
+        getBestDiscount();
+        getNewItem();
     }
 
 
@@ -71,6 +114,24 @@ const View = {
         Api.Category.GetAll()
             .done(res => {
                 View.Category.render(res.data)
+            })
+            .fail(err => { IndexView.helper.showToastError('Error', 'Có lỗi sảy ra'); })
+            .always(() => { });
+    }
+
+    function getBestDiscount(){
+        Api.Product.GetBestDiscount()
+            .done(res => {
+                View.Product.bestDiscount(res.data)
+            })
+            .fail(err => { IndexView.helper.showToastError('Error', 'Có lỗi sảy ra'); })
+            .always(() => { });
+    }
+
+    function getNewItem(){
+        Api.Product.getNewItem()
+            .done(res => {
+                View.Product.newItem(res.data)
             })
             .fail(err => { IndexView.helper.showToastError('Error', 'Có lỗi sảy ra'); })
             .always(() => { });

@@ -6,47 +6,19 @@ const View = {
                 data.name,  
                 data.prices,  
                 `<img src="/${data.image}" style="width:200px" alt="">`,   
-                `<label class="switch" data-id="${data.id}" atr="Status"> <span class="slider round ${data.status == '1' ? 'active' : ''}"></span> </label>`,
+                `<label class="switch" data-id="${data.id}" atr="Status"> <span class="slider round ${data.trending == '1' ? 'active' : ''}"></span> </label>`,
                 `<div class="view-data tab-action" atr="View" style="cursor: pointer" data-id="${data.id}"><i class="anticon anticon-edit"></i></div>
                 <div class="view-data tab-action" atr="Delete" style="cursor: pointer" data-id="${data.id}"><i class="anticon anticon-delete"></i></div>`
             ]
         },
         init(){
             var row_table = [
-                    {
-                        title: 'ID',
-                        name: 'id',
-                        orderable: true,
-                        width: '10%',
-                    },
-                    {
-                        title: 'Tên',
-                        name: 'name',
-                        orderable: true,
-                        width: '10%',
-                    },
-                    {
-                        title: 'Đơn giá',
-                        name: 'name',
-                        orderable: true,
-                        width: '10%',
-                    },
-                    {
-                        title: 'Hình ảnh',
-                        name: 'image',
-                        orderable: true,
-                    },   
-                    {
-                        title: 'Trạng thái',
-                        name: 'image',
-                        orderable: true,
-                    },   
-                    {
-                        title: 'Hành động',
-                        name: 'Action',
-                        orderable: true,
-                        width: '10%',
-                    },
+                    { title: 'ID', name: 'id', orderable: true, width: '10%', },
+                    { title: 'Tên', name: 'name', orderable: true, width: '10%', },
+                    { title: 'Đơn giá', name: 'name', orderable: true, width: '10%', },
+                    { title: 'Hình ảnh', name: 'image', orderable: true, },   
+                    { title: 'Trạng thái', name: 'image', orderable: true, },   
+                    { title: 'Hành động', name: 'Action', orderable: true, width: '10%', },
                 ];
             IndexView.table.init("#data-table", row_table);
         }
@@ -68,8 +40,8 @@ const View = {
     },
     FullTab: {  
         Create: { 
-            setVal(resource, data){
-                data.map((v, k) => {
+            setVal(resource){
+                View.Data.Category.map((v, k) => {
                     $(`${resource}`)
                         .find('.data-category')
                         .append(`<div class="radio">
@@ -123,29 +95,21 @@ const View = {
         },
         Update: { 
             setVal(resource, data){
-                View.Data.Executive.map((v, k) => {
-                    $(`#popup-update`)
-                        .find('.data-writer')
+                View.Data.Category.map((v, k) => {
+                    $(`${resource}`)
+                        .find('.data-category')
                         .append(`<div class="radio">
-                                    <input id="radio${k}" name="writer" value="${v.executive_id}" type="radio">
+                                    <input id="radio${k}" name="category" value="${v.id}" type="radio" ${ k == 0 ? "checked" : "" }>
                                     <label for="radio${k}">${v.name}</label>
                                 </div>`);
                 })
-                $(`${resource}`).find('.data-id').val(data.data.id);
-                $(`${resource}`).find('.data-id-vi').val(data.data_vi.id);
-                $(`${resource}`).find('.data-id-en').val(data.data_en.id);
-                $(`${resource}`).find('.image-preview').css({
-                    'background-image': `url('/${data.data.image ?? 'icon/noimage.png'}')`
-                })
-                $(`${resource}`).find('.data-link').val(data.data.link_url);
-                $(`${resource}`).find('.data-title-en').val(data.data_en.title);
-                $(`${resource}`).find('.data-description-en').val(data.data_en.description);
-                IndexView.summerNote.update(`${resource} .data-detail-vi`, data.data_vi.detail); 
-                $(`${resource}`).find('.data-title-vi').val(data.data_vi.title);
-                $(`${resource}`).find('.data-description-vi').val(data.data_vi.description);
-                IndexView.summerNote.update(`${resource} .data-detail-en`, data.data_en.detail); 
-
-                $(document).find(`${resource}`).find(`[name=writer][value=${data.data.executive_id}]`).prop('checked', true);;
+                $(`${resource}`).find('.data-id').val(data.id);
+                $(`${resource}`).find(`[name=category][value=${data.category_id}]`).prop('checked', true);
+                $(`${resource}`).find('.image-preview').css({ 'background-image': `url('/${data.image ?? 'icon/noimage.png'}')` });
+                $(`${resource}`).find('.data-name').val(data.name);
+                $(`${resource}`).find('.data-prices').val(data.prices);
+                $(`${resource}`).find('.data-description').val(data.description);
+                IndexView.summerNote.update(`${resource} .data-detail`, data.detail); 
             },
             getVal(resource){ 
                 var fd = new FormData();
@@ -155,40 +119,27 @@ const View = {
                 const noScript = /(<\s*script[^>]*>(.*?)<\s*\/\s*script>)/ig;
 
                 var data_id             = $(`${resource}`).find('.data-id').val().replace(noTag, "");
-                var data_id_en          = $(`${resource}`).find('.data-id-en').val().replace(noTag, "");
-                var data_id_vi          = $(`${resource}`).find('.data-id-vi').val().replace(noTag, "");
-
                 var data_image          = $(`${resource}`).find('.data-image')[0].files;
-                var data_writer         = $(`${resource}`).find('[name=writer]:checked').val().replace(noTag, ""); 
-
-                var data_title_en        = $(`${resource}`).find('.data-title-en').val().replace(noTag, "");
-                var data_title_vi        = $(`${resource}`).find('.data-title-vi').val().replace(noTag, "");
-                var data_description_en    = $(`${resource}`).find('.data-description-en').val().replace(noTag, "");
-                var data_description_vi    = $(`${resource}`).find('.data-description-vi').val().replace(noTag, "");
-                var data_detail_en      = $(`${resource}`).find('.data-detail-en').val();
-                var data_detail_vi      = $(`${resource}`).find('.data-detail-vi').val();
-                var data_writer         = $(`${resource}`).find('[name=writer]:checked').val().replace(noTag, ""); 
-                var data_link           = $(`${resource}`).find('.data-link').val().replace(noTag, "");
+                var data_name           = $(`${resource}`).find('.data-name').val().replace(noTag, "");
+                var data_category       = $(`${resource}`).find('[name=category]:checked').val();
+                var data_prices         = $(`${resource}`).find('.data-prices').val().replace(noTag, "");
+                var data_description    = $(`${resource}`).find('.data-description').val().replace(noTag, "");
+                var data_detail         = $(`${resource}`).find('.data-detail').val();
 
                 // --Required Value
-                if (data_title_en == '' || data_title_vi == '') { required_data.push('Nhập tiêu đề.'); onPushData = false }
-                if (data_description_en == '' || data_description_vi == '') { required_data.push('Nhập mô tả ngắn.'); onPushData = false }
-                if (data_detail_en == '' || data_detail_vi == '') { required_data.push('Nhập nội dung.'); onPushData = false }
-                if (data_link == '') { required_data.push('Nhập link đăng kí.'); onPushData = false }
+                if (data_name == '') { required_data.push('Nhập tên.'); onPushData = false }
+                if (data_prices == '') { required_data.push('Nhập đơn giá.'); onPushData = false }
+                if (data_description == '') { required_data.push('Nhập mô tả ngắn.'); onPushData = false }
+                if (data_detail == '') { required_data.push('Mô tả đầy đủ.'); onPushData = false }
 
                 if (onPushData) {
                     fd.append('data_id', data_id); 
-                    fd.append('data_id_en', data_id_en); 
-                    fd.append('data_id_vi', data_id_vi); 
-                    fd.append('data_image', data_image[0] ?? "null"); 
-                    fd.append('data_title_en', data_title_en); 
-                    fd.append('data_title_vi', data_title_vi); 
-                    fd.append('data_description_en', data_description_en);  
-                    fd.append('data_description_vi', data_description_vi); 
-                    fd.append('data_detail_en', data_detail_en);  
-                    fd.append('data_detail_vi', data_detail_vi);  
-                    fd.append('data_writer', data_writer);  
-                    fd.append('data_link', data_link);  
+                    fd.append('data_image', data_image[0] ?? "null");  
+                    fd.append('data_name', data_name); 
+                    fd.append('data_prices', data_prices); 
+                    fd.append('data_description', data_description); 
+                    fd.append('data_detail', data_detail); 
+                    fd.append('data_category', data_category);  
 
                     return fd;
                 }else{
@@ -262,7 +213,7 @@ const View = {
     View.FullTab.onShow("Create", () => {
         View.FullTab.doShow("Create");
         View.FullTab.Create.init("Create");  
-        View.FullTab.Create.setVal("#popup-create", View.Data.Category) 
+        View.FullTab.Create.setVal("#popup-create") 
     })
     View.FullTab.onPush("Confirm", "#popup-create", () => { 
         var fd = View.FullTab.Create.getVal("#popup-create");
@@ -287,6 +238,7 @@ const View = {
         IndexView.helper.showToastProcessing('Process', 'Đang xử lí');
         Api.Product.getOne(id)
             .done(res => { 
+                console.log(res);
                 View.FullTab.Update.setVal("#popup-update", res.data)
                 IndexView.helper.showToastSuccess('Success', 'Lấy ra dữ liệu'); 
             })

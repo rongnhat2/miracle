@@ -31,8 +31,9 @@
                                         <span class="icon-star-full"></span>
                                     </div>
                                     <div class="btn-group-default delay-4s" data-animate="hg-fadeInUp">
-                                        <a href="food-menu-v2.html" class="btn btn-default btn-primary btn-white">OUR
-                                            Menu</a>
+                                        <a href="food-menu-v2.html" class="btn btn-default btn-primary btn-white">
+                                            OUR Menu
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -196,21 +197,7 @@
                 </div><!-- /.row -->
                 <div class="row">
                     <div class="col-12">
-                        <div class="special-food-content">
-                            <div class="special-food-bg bg-image"
-                                style="background-image:url('{{ asset("customer/assets/images/bg/specialfood-left.jpg") }}')"></div>
-                            <div class="special-food-content-inner">
-                                <div class="special-food-content-text">
-                                    <h3 class="food-title">Shrimp & Crawfish Fondeaux</h3>
-                                    <div class="food-price"><del>114.<sup>99£</sup></del> 82.<sup>99£</sup></div>
-                                    <p>A barbecue grill is a device that cooks food by applying heat from below. There
-                                        are several that cooks food by applying heat from below.</p>
-                                    <div class="btn-group-default">
-                                        <a href="#" class="btn btn-default btn-black">ORDER NOW</a>
-                                        <a href="#" class="btn btn-default">ADD TO CART</a>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="special-food-content best-discount-item pa-0">
                         </div>
                     </div>
                 </div>
@@ -218,8 +205,16 @@
         </div>
         <!--~~./ end special food block ~~-->
 
-        <div class="food-menu-block pd-b-100">
-
+        <div class="food-menu-block pd-b-100 ptb-100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="section-title section-default-two text-center">
+                            <h2 class="title-main"><span>New item</span> </h2><!-- /.title-main -->
+                        </div><!-- /.section-title -->
+                    </div><!-- /.col-12 -->
+                </div><!-- /.row -->
+            </div>
             <!--~./ end filter foodmenu tab ~-->
             <div class="container">
                 <div class="row">
@@ -227,125 +222,8 @@
                         <div class="tab-content filter-foodmenu-tab-content pd-t-100">
                             <!--~~~~~ Start Tab Pane ~~~~~-->
                             <div class="tab-pane fade active show hg-fadeInUp animated" id="foodmenu2" role="tabpanel" data-animate="hg-fadeInUp" style="visibility: visible;">
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="food-grid-item grid-style-five gird-style">
-                                            <div class="food-thumb">
-                                                <img src="assets/images/foodmenu/menu14/food1.jpg" alt="Food">
-                                                <span class="cat-status popular">popular</span>
-                                            </div>
-                                            <div class="food-info">
-                                                <h3 class="food-title"><a href="single-food.html">Mozzarella Sticks</a>
-                                                </h3>
-                                                <div class="food-footer-info">
-                                                    <div class="food-price">10.<sup>00£</sup></div>
-                                                    <div class="rating">
-                                                        <ul class="list">
-                                                            <li class="yellow"><span class="fas fa-star"></span></li>
-                                                            <li class="yellow"><span class="fas fa-star"></span></li>
-                                                            <li class="yellow"><span class="fas fa-star"></span></li>
-                                                            <li class="yellow"><span class="fas fa-star"></span></li>
-                                                            <li><span class="fas fa-star"></span></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="food-info-content">
-                                                    <p>A barbecue grill is a device that cooks food by applying heat
-                                                        from below. There are several varieties of grills</p>
-                                                    <a class="read-more" href="#">Buy now <span class="icon-next4"></span></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!--~./ food-menu-item ~-->
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="food-grid-item grid-style-five gird-style">
-                                            <div class="food-thumb">
-                                                <img src="assets/images/foodmenu/menu14/food2.jpg" alt="Food">
-                                            </div>
-                                            <div class="food-info">
-                                                <h3 class="food-title"><a href="single-food.html">Margreta Pizza </a>
-                                                </h3>
-                                                <div class="food-footer-info">
-                                                    <div class="food-price">10.<sup>00£</sup></div>
-                                                    <div class="rating">
-                                                        <ul class="list">
-                                                            <li class="yellow"><span class="fas fa-star"></span></li>
-                                                            <li class="yellow"><span class="fas fa-star"></span></li>
-                                                            <li class="yellow"><span class="fas fa-star"></span></li>
-                                                            <li class="yellow"><span class="fas fa-star"></span></li>
-                                                            <li><span class="fas fa-star"></span></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="food-info-content">
-                                                    <p>A barbecue grill is a device that cooks food by applying heat
-                                                        from below. There are several varieties of grills</p>
-                                                    <a class="read-more" href="#">Buy now <span class="icon-next4"></span></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!--~./ food-menu-item ~-->
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="food-grid-item grid-style-five gird-style">
-                                            <div class="food-thumb">
-                                                <img src="assets/images/foodmenu/menu14/food3.jpg" alt="Food">
-                                                <span class="cat-status recommended">recommended</span>
-                                            </div>
-                                            <div class="food-info">
-                                                <h3 class="food-title"><a href="single-food.html">Pasta Salamon</a></h3>
-                                                <div class="food-footer-info">
-                                                    <div class="food-price">10.<sup>00£</sup></div>
-                                                    <div class="rating">
-                                                        <ul class="list">
-                                                            <li class="yellow"><span class="fas fa-star"></span></li>
-                                                            <li class="yellow"><span class="fas fa-star"></span></li>
-                                                            <li class="yellow"><span class="fas fa-star"></span></li>
-                                                            <li class="yellow"><span class="fas fa-star"></span></li>
-                                                            <li><span class="fas fa-star"></span></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="food-info-content">
-                                                    <p>A barbecue grill is a device that cooks food by applying heat
-                                                        from below. There are several varieties of grills</p>
-                                                    <a class="read-more" href="#">Buy now <span class="icon-next4"></span></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!--~./ food-menu-item ~-->
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="food-grid-item grid-style-five gird-style">
-                                            <div class="food-thumb">
-                                                <img src="assets/images/foodmenu/menu14/food4.jpg" alt="Food">
-                                                <span class="cat-status topseller">Top Seller</span>
-                                            </div>
-                                            <div class="food-info">
-                                                <h3 class="food-title"><a href="single-food.html">Spinach &amp; Artichoke
-                                                        Dip </a></h3>
-                                                <div class="food-footer-info">
-                                                    <div class="food-price">10.<sup>00£</sup></div>
-                                                    <div class="rating">
-                                                        <ul class="list">
-                                                            <li class="yellow"><span class="fas fa-star"></span></li>
-                                                            <li class="yellow"><span class="fas fa-star"></span></li>
-                                                            <li class="yellow"><span class="fas fa-star"></span></li>
-                                                            <li class="yellow"><span class="fas fa-star"></span></li>
-                                                            <li><span class="fas fa-star"></span></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="food-info-content">
-                                                    <p>A barbecue grill is a device that cooks food by applying heat
-                                                        from below. There are several varieties of grills</p>
-                                                    <a class="read-more" href="#">Buy now <span class="icon-next4"></span></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!--~./ food-menu-item ~-->
-                                    </div>
+                                <div class="row data-new-item">
+                                    
                                 </div>
                             </div>
                             <!--~./ end tab pane ~-->
@@ -417,87 +295,6 @@
                                         </div><!-- /.form-group -->
                                     </div>
 
-                                    <div class="col-lg-6 col-md-6">
-                                        <div class="form-group">
-                                            <select name="occasion" class="select-custom">
-                                                <option value="">Occasion</option>
-                                                <option value="Occasion 1">Occasion 1</option>
-                                                <option value="Occasion 2">Occasion 2</option>
-                                                <option value="Occasion 3">Occasion 3</option>
-                                                <option value="Occasion 4">Occasion 4</option>
-                                                <option value="Occasion 5">Occasion 5</option>
-                                                <option value="Occasion 6">Occasion 6</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6">
-                                        <div class="form-group">
-                                            <select name="food" class="select-custom">
-                                                <option value="">Preferred Food</option>
-                                                <option value="Food 1">Food 1</option>
-                                                <option value="Food 2">Food 2</option>
-                                                <option value="Food 3">Food 3</option>
-                                                <option value="Food 4">Food 4</option>
-                                                <option value="Food 5">Food 5</option>
-                                                <option value="Food 6">Food 6</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-6 col-md-6">
-                                        <div class="form-group">
-                                            <select name="branch" class="select-custom">
-                                                <option value="">Branch</option>
-                                                <option value="Branch 1">Branch 1</option>
-                                                <option value="Branch 2">Branch 2</option>
-                                                <option value="Branch 3">Branch 3</option>
-                                                <option value="Branch 4">Branch 4</option>
-                                                <option value="Branch 5">Branch 5</option>
-                                                <option value="Branch 6">Branch 6</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-4 col-md-6">
-                                        <div class="form-group">
-                                            <select name="personnum" class="select-custom">
-                                                <option value="">Number Of Persons</option>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                                <option value="5">5</option>
-                                                <option value="6">6</option>
-                                                <option value="7">7</option>
-                                                <option value="8">8</option>
-                                                <option value="9">9</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-4 col-md-6">
-                                        <div class="form-group">
-                                            <select name="booking_type" class="select-custom">
-                                                <option value="">Booking Type</option>
-                                                <option value="type_1">Type 1</option>
-                                                <option value="type_2">Type 2</option>
-                                                <option value="type_3">Type 3</option>
-                                                <option value="type_4">Type 4</option>
-                                                <option value="type_5">Type 5</option>
-                                                <option value="type_6">Type 6</option>
-                                                <option value="type_7">Type 7</option>
-                                                <option value="type_8">Type 8</option>
-                                                <option value="type_9">Type 9</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-4 col-md-6">
-                                        <div class="form-group date">
-                                            <input data-toggle="datepicker" name="date" type="text" class="form-controllar"
-                                                placeholder="Booking Date">
-                                        </div>
-                                    </div>
                                     <div class="col-12">
                                         <div class="form-group">
                                             <textarea class="form-controllar" name="comment2" placeholder="Comment"></textarea>

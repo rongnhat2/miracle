@@ -22,7 +22,7 @@
                 <ul class="dropdown-menu"> 
                     <li class="category"> <a href="{{ route('admin.category.index') }}">Danh mục</a> </li>
                     <li class="product"> <a href="{{ route('admin.product.index') }}">Sản phẩm</a> </li>
-                    <li class="discount"> <a href="{{ route('admin.product.index') }}">Giảm giá</a> </li>
+                    <li class="discount"> <a href="{{ route('admin.discount.index') }}">Giảm giá</a> </li>
                 </ul>
             </li> 
             <li class="nav-item dropdown product-group">

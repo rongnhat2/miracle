@@ -18,13 +18,13 @@
             <div class="col-12">
                 <div class="page-header-content text-center">
                     <div class="page-header-caption">
-                        <h2 class="page-title">Single Menu</h2>
+                        <h2 class="page-title product-name"></h2>
                     </div>
                     <div class="breadcrumb-area">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="/">Home</a></li>
                             <li class="breadcrumb-item"><a href="/category">Menu</a></li>
-                            <li class="breadcrumb-item active">Single Menu</li>
+                            <li class="breadcrumb-item active product-name"></li>
                         </ol>
                     </div>
                     <!--~~./ breadcrumb-area ~~-->
@@ -53,11 +53,11 @@
                 <div class="col-lg-6">
                     <div class="single-food-content-area">
                         <div class="single-food-header">
-                            <h3 class="food-title">Doughnut Chocolate Donut</h3>
-                            <div class="food-price">38.<sup>00€</sup></div>
+                            <h3 class="food-title product-name"></h3>
+                            <div class="food-price product-prices"></div>
                         </div>
                         <div class="food-item-info">
-                            <div class="description">
+                            <div class="description product-description">
                                 <p>You think water moves fast, You should see ice. It moves like it has ande
                                     mind. Like it knows it killed the world once and got a taste for murdering.
                                     After the avalanche.</p>
@@ -137,7 +137,7 @@
     <!--~./ end single food feature ~-->
 
     <!--~~~~~ Start Food Details Tab Area ~~~~~-->
-    <div class="food-details-tab-area text-center ptb-100 bg-white-smoke">
+    <div class="food-details-tab-area ptb-100 bg-white-smoke">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -145,10 +145,7 @@
                         <ul class="nav nav-tabs" role="tablist">
                             <li>
                                 <a class="active" data-toggle="tab" href="#food_description"
-                                    role="tab">Description</a>
-                            </li>
-                            <li>
-                                <a data-toggle="tab" href="#food_details" role="tab">Details</a>
+                                    role="tab">Detail</a>
                             </li>
                             <li>
                                 <a data-toggle="tab" href="#food_reviews" role="tab">Reviews</a>
@@ -159,26 +156,9 @@
 
                     <div class="tab-content filter-tab-content">
                         <!--~~~~~ Start Tab Pane ~~~~~-->
-                        <div class="tab-pane fade show active food-description ml-b-5" id="food_description"
-                            role="tabpanel">
-                            <p>The lysine contingency - it's intended to prevent the spread of the animals is
-                                case they ever got off the island. Dr. Wu inserted a gene that makes a single
-                                faulty enzyme in protein metabolism. The prevent the spread of the animals
-                                isanimals can't manufacture the amino acid lysine. Unless they're continually
-                                supplied with lysine by us, they'll slip into a coma and die.</p>
-                            <p>The lysine contingency - it's intended to prevent the spread of the animals is
-                                case they ever got off the island. Dr. Wu inserted a gene that makes a single
-                                faulty enzyme in protein metabolism.</p>
-                        </div>
-                        <!--~./ end tab pane ~-->
+                        <div class="tab-pane fade show active ml-b-5 product-detail" id="food_description"
+                            role="tabpanel ">
 
-                        <!--~~~~~ Start Tab Pane ~~~~~-->
-                        <div class="tab-pane fade" id="food_details" role="tabpanel">
-                            <div class="food-desc">
-                                <span class="item-number"><b>Product Number :</b> #41121120</span>
-                                <span class="item-cat"><b>Category :</b> Men's Suits</span>
-                                <span class="item-tag"><b>Tags :</b> elegant, men, shirt, clean</span>
-                            </div>
                         </div>
                         <!--~./ end tab pane ~-->
 
@@ -347,5 +327,5 @@
 @endsection()
 
 @section('js')
-    <script src="{{ asset('customer/assets/js/page/index.js') }}"></script>
+    <script src="{{ asset('customer/assets/js/page/product.js') }}"></script>
 @endsection()

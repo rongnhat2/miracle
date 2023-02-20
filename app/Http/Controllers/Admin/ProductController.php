@@ -24,24 +24,18 @@ class ProductController extends Controller
     public function index(){
         return view("admin.manager.product");
     }
+    // Lấy ra tất cả đối tượng
     public function get(){
         $data = $this->product->get_all();
         return $this->product->send_response(201, $data, null);
     }
+    // Lấy ra một đối tượng
     public function get_one($id){
-        $data       = $this->event->get_one($id);
-        $data_en    = $this->event->get_lang($id, 1);
-        $data_vi    = $this->event->get_lang($id, 2);
-        $data_response = [
-            "data"      => $data,
-            "data_en"   => $data_en,
-            "data_vi"   => $data_vi,
-        ];
-        return $this->event->send_response(200, $data_response, null);
+        $data       = $this->product->get_one($id);  
+        return $this->product->send_response(200, $data, null);
     }
- 
+    // tạo mới một đối tượng
     public function store(Request $request){  
-
         $data_image = $this->product->imageInventor('image-product', $request->data_image, 600);
         $data_item = [ 
             "category_id"   => $request->data_category,  
@@ -56,36 +50,42 @@ class ProductController extends Controller
 
         return $this->product->send_response(201, null, null);
     }
-    public function update(Request $request){   
+    // Cập nhật một đối tượng
+    public function update(Request $request){
         $data_item = [ 
-            "executive_id"  => $request->data_writer,
-            "link_url"      => $request->data_link,  
+            "category_id"   => $request->data_category,
+            "name"          => $request->data_name,  
+            "slug"          => $this->product->to_slug($request->data_name),
+            "description"   => $request->data_description,  
+            "detail"        => $request->data_detail,  
+            "prices"        => $request->data_prices,  
         ];
-        if ($request->data_image != "null") {
-            $data_item["image"] = $this->event->imageInventor('image-upload', $request->data_image, 1920);
+        if ($request->data_image != "null") { $data["image"] = $this->product->imageInventor('image-product', $request->data_image, 500); }
+        $this->product->update($data_item, $request->data_id); 
+
+        return $this->product->send_response(200, null, null);
+    }
+    // Cập nhật một đối tượng
+    public function refresh_slug(){
+        $data = $this->product->get_all();
+        foreach ($data as $key => $value) {
+            $data_item = [ 
+                "slug"          => $this->product->to_slug($value->name),
+            ];
+            $this->product->update($data_item, $value->id);
         }
-        $this->event->update($data_item, $request->data_id);
-
-        $data_en = [ 
-            "title"              => $request->data_title_en,  
-            "description"          => $request->data_description_en,  
-            "detail"          => $request->data_detail_en,  
-        ];
-        $this->eventLang->update($data_en, $request->data_id_en); 
-
-        $data_vi = [ 
-            "title"              => $request->data_title_vi,  
-            "description"          => $request->data_description_vi,  
-            "detail"          => $request->data_detail_vi,  
-        ];
-        $this->eventLang->update($data_vi, $request->data_id_vi); 
-
-        return $this->event->send_response(200, null, null);
+        return $this->product->send_response(200, null, null);
     }
 
+    // Xóa một đối tượng
     public function delete($id){
-        $this->event->delete($id); 
-        $this->event->delete_lang($id); 
-        return $this->event->send_response(200, "Delete successful", null);
+        $this->product->delete($id);
+        return $this->product->send_response(200, "Delete successful", null);
+    }
+
+    // cập nhật trending
+    public function update_trending(Request $request){
+        $this->product->update_trending($request->id);
+        return $this->product->send_response(200, null, null);
     }
 }

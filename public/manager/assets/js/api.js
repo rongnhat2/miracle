@@ -3,6 +3,7 @@ const Api = {
     Product: {},  
     Branch: {},  
     Warehouse: {},  
+    Discount: {},
 
     Image: {},
     
@@ -46,6 +47,14 @@ const Api = {
         url: `/apip/category/delete/${id}`,
         method: 'GET',
     });
+    Api.Category.Trending = (id) => $.ajax({
+        url: `/apip/category/update-trending`,
+        method: 'PUT',
+        dataType: 'json',
+        data: {
+            id: id ?? '',
+        }
+    });
 })();
 
 //Product
@@ -76,6 +85,38 @@ const Api = {
         url: `/apip/product/delete/${id}`,
         method: 'GET',
     });
+    Api.Product.Trending = (id) => $.ajax({
+        url: `/apip/product/update-trending`,
+        method: 'PUT',
+        dataType: 'json',
+        data: {
+            id: id ?? '',
+        }
+    });
+})();
+
+
+//Discount
+(() => {
+    Api.Discount.GetAll = () => $.ajax({
+        url: `/apip/discount/get`,
+        method: 'GET',
+    });
+    Api.Discount.GetDiscount = () => $.ajax({
+        url: `/apip/discount/get-discount`,
+        method: 'GET',
+    });
+    Api.Discount.Store = (data) => $.ajax({
+        url: `/apip/discount/store`,
+        method: 'POST',
+        data: data,
+        contentType: false,
+        processData: false,
+    });  
+    Api.Discount.Delete = (id) => $.ajax({
+        url: `/apip/discount/delete/${id}`,
+        method: 'GET',
+    }); 
 })();
 
 //Branch
@@ -130,23 +171,6 @@ const Api = {
         method: 'GET',
     });
 })();
-
-
-//Layout
-(() => {
-    Api.Layout.GetAll = () => $.ajax({
-        url: `/apip/layout/get`,
-        method: 'GET',
-    }); 
-    Api.Layout.Update = (data) => $.ajax({
-        url: `/apip/layout/update`,
-        method: 'POST',
-        data: data,
-        contentType: false,
-        processData: false,
-    });
-})();
-
 
 
 // Image

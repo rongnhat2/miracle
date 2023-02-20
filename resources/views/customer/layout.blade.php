@@ -46,6 +46,7 @@
     <link rel="stylesheet" href="{{ asset("customer/assets/css/style.css") }}">
     <link rel="stylesheet" href="{{ asset("customer/assets/css/color/color-seven.css") }}">
 
+    <link rel="stylesheet" href="{{ asset("customer/assets/css/custom.css") }}">
     <script src="{{ asset("customer/assets/js/modernizr.min.js") }}"></script>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 </head>
@@ -84,7 +85,7 @@
                         </div>
                         <div class="col-4">
                             <div class="site-branding">
-                                <a href="index02.html">
+                                <a href="{{ route("customer.view.index") }}">
                                     <img src="{{ asset("customer/assets/images/logo/logo10.png") }}" alt="Site Logo" />
                                 </a>
                             </div><!-- /.site-branding -->
@@ -96,7 +97,7 @@
                                 <div class="header-card-area">
                                     <a href="#">
                                         <span class="icon-paper-bag"></span>
-                                        <sup>2</sup>
+                                        <sup>0</sup>
                                     </a>
                                 </div>
                                 <!--~./ header card area ~-->
@@ -123,7 +124,7 @@
                                             <ul class="mainmenu">
                                                 <li><a href="/">Home</a></li>
                                                 <li><a href="/about">About Us</a></li>
-                                                <li><a href="/category">Product</a></li>
+                                                <li><a href="/category">Category</a></li>
                                                 <li><a href="/news">News</a></li>
                                                 <li><a href="/contact">Contact</a></li>
                                             </ul> <!-- /.menu-list -->

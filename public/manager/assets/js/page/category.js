@@ -12,34 +12,11 @@ const View = {
         },
         init(){
             var row_table = [
-                    {
-                        title: 'ID',
-                        name: 'id',
-                        orderable: true,
-                        width: '10%',
-                    },
-                    {
-                        title: 'Tên',
-                        name: 'name',
-                        orderable: true,
-                        width: '10%',
-                    },
-                    {
-                        title: 'Hình ảnh',
-                        name: 'image',
-                        orderable: true,
-                    },   
-                    {
-                        title: 'Trạng thái',
-                        name: 'image',
-                        orderable: true,
-                    },   
-                    {
-                        title: 'Hành động',
-                        name: 'Action',
-                        orderable: true,
-                        width: '10%',
-                    },
+                    { title: 'ID', name: 'id', orderable: true, width: '10%', },
+                    { title: 'Tên', name: 'name', orderable: true, width: '10%', },
+                    { title: 'Hình ảnh', name: 'image', orderable: true, },   
+                    { title: 'Trạng thái', name: 'image', orderable: true, },   
+                    { title: 'Hành động', name: 'Action', orderable: true, width: '10%', },
                 ];
             IndexView.table.init("#data-table", row_table);
         }
@@ -108,29 +85,11 @@ const View = {
         },
         Update: { 
             setVal(resource, data){
-                View.Data.Executive.map((v, k) => {
-                    $(`#popup-update`)
-                        .find('.data-writer')
-                        .append(`<div class="radio">
-                                    <input id="radio${k}" name="writer" value="${v.executive_id}" type="radio">
-                                    <label for="radio${k}">${v.name}</label>
-                                </div>`);
-                })
-                $(`${resource}`).find('.data-id').val(data.data.id);
-                $(`${resource}`).find('.data-id-vi').val(data.data_vi.id);
-                $(`${resource}`).find('.data-id-en').val(data.data_en.id);
-                $(`${resource}`).find('.image-preview').css({
-                    'background-image': `url('/${data.data.image ?? 'icon/noimage.png'}')`
-                })
-                $(`${resource}`).find('.data-link').val(data.data.link_url);
-                $(`${resource}`).find('.data-title-en').val(data.data_en.title);
-                $(`${resource}`).find('.data-description-en').val(data.data_en.description);
-                IndexView.summerNote.update(`${resource} .data-detail-vi`, data.data_vi.detail); 
-                $(`${resource}`).find('.data-title-vi').val(data.data_vi.title);
-                $(`${resource}`).find('.data-description-vi').val(data.data_vi.description);
-                IndexView.summerNote.update(`${resource} .data-detail-en`, data.data_en.detail); 
-
-                $(document).find(`${resource}`).find(`[name=writer][value=${data.data.executive_id}]`).prop('checked', true);;
+                $(`${resource}`).find('.data-id').val(data.id);
+                $(resource).find(".data-icon-val").val(data.icon);
+                $(`${resource}`).find('.data-name').val(data.name);
+                $(resource).find(".icon-preview").append(`<span class="${data.icon}" data-icon="${data.icon}"></span>`)
+                $(`${resource}`).find('.image-preview').css({ 'background-image': `url('/${data.image ?? 'icon/noimage.png'}')` });
             },
             getVal(resource){ 
                 var fd = new FormData();
@@ -140,40 +99,20 @@ const View = {
                 const noScript = /(<\s*script[^>]*>(.*?)<\s*\/\s*script>)/ig;
 
                 var data_id             = $(`${resource}`).find('.data-id').val().replace(noTag, "");
-                var data_id_en          = $(`${resource}`).find('.data-id-en').val().replace(noTag, "");
-                var data_id_vi          = $(`${resource}`).find('.data-id-vi').val().replace(noTag, "");
 
                 var data_image          = $(`${resource}`).find('.data-image')[0].files;
-                var data_writer         = $(`${resource}`).find('[name=writer]:checked').val().replace(noTag, ""); 
-
-                var data_title_en        = $(`${resource}`).find('.data-title-en').val().replace(noTag, "");
-                var data_title_vi        = $(`${resource}`).find('.data-title-vi').val().replace(noTag, "");
-                var data_description_en    = $(`${resource}`).find('.data-description-en').val().replace(noTag, "");
-                var data_description_vi    = $(`${resource}`).find('.data-description-vi').val().replace(noTag, "");
-                var data_detail_en      = $(`${resource}`).find('.data-detail-en').val();
-                var data_detail_vi      = $(`${resource}`).find('.data-detail-vi').val();
-                var data_writer         = $(`${resource}`).find('[name=writer]:checked').val().replace(noTag, ""); 
-                var data_link           = $(`${resource}`).find('.data-link').val().replace(noTag, "");
+                var data_icon        = $(`${resource}`).find('.data-icon-val').val().replace(noTag, "");
+                var data_name        = $(`${resource}`).find('.data-name').val().replace(noTag, "");
 
                 // --Required Value
-                if (data_title_en == '' || data_title_vi == '') { required_data.push('Nhập tiêu đề.'); onPushData = false }
-                if (data_description_en == '' || data_description_vi == '') { required_data.push('Nhập mô tả ngắn.'); onPushData = false }
-                if (data_detail_en == '' || data_detail_vi == '') { required_data.push('Nhập nội dung.'); onPushData = false }
-                if (data_link == '') { required_data.push('Nhập link đăng kí.'); onPushData = false }
+                if (data_name == '') { required_data.push('Nhập tên.'); onPushData = false }
+                if (data_icon == '') { required_data.push('Chọn icon.'); onPushData = false }
 
                 if (onPushData) {
                     fd.append('data_id', data_id); 
-                    fd.append('data_id_en', data_id_en); 
-                    fd.append('data_id_vi', data_id_vi); 
                     fd.append('data_image', data_image[0] ?? "null"); 
-                    fd.append('data_title_en', data_title_en); 
-                    fd.append('data_title_vi', data_title_vi); 
-                    fd.append('data_description_en', data_description_en);  
-                    fd.append('data_description_vi', data_description_vi); 
-                    fd.append('data_detail_en', data_detail_en);  
-                    fd.append('data_detail_vi', data_detail_vi);  
-                    fd.append('data_writer', data_writer);  
-                    fd.append('data_link', data_link);  
+                    fd.append('data_icon', data_icon); 
+                    fd.append('data_name', data_name); 
 
                     return fd;
                 }else{
@@ -227,27 +166,6 @@ const View = {
     init(){
         View.Layout.init();
         View.table.init(); 
-    }
-};
-(() => {
-    View.init();
-    function init(){
-        getData();
-        getExecutive();
-    }
-    // Table
-    View.FullTab.onShow("Table", () => {
-        View.FullTab.doShow("Table");
-        View.FullTab.default("Create");
-        View.FullTab.default("Update");
-        getData();
-    })
-    
-    // Create
-    View.FullTab.onShow("Create", () => {
-        View.FullTab.doShow("Create");
-        View.FullTab.Create.init("Create"); 
-        Icon.render(".icon-list-data");
         $(document).on('click', '.icon-preview', function() {
             $(".icon-list-data").addClass("is-open")
         });
@@ -263,6 +181,26 @@ const View = {
             $(".icon-preview").html(`<span class="${icon}" data-icon="${icon}"></span>`);
             $('.icon-list-data').removeClass('is-open');
         });
+    }
+};
+(() => {
+    View.init();
+    function init(){
+        getData();
+    }
+    // Table
+    View.FullTab.onShow("Table", () => {
+        View.FullTab.doShow("Table");
+        View.FullTab.default("Create");
+        View.FullTab.default("Update");
+        getData();
+    })
+    
+    // Create
+    View.FullTab.onShow("Create", () => {
+        View.FullTab.doShow("Create");
+        View.FullTab.Create.init("Create"); 
+        Icon.render("#popup-create .icon-list-data");
     })
     View.FullTab.onPush("Confirm", "#popup-create", () => { 
         var fd = View.FullTab.Create.getVal("#popup-create");
@@ -284,6 +222,7 @@ const View = {
     View.FullTab.onShow("View", (id) => {
         View.FullTab.doShow("Update");
         View.FullTab.Update.init("Update");
+        Icon.render("#popup-update .icon-list-data");
         IndexView.helper.showToastProcessing('Process', 'Đang xử lí');
         Api.Category.getOne(id)
             .done(res => { 
@@ -356,14 +295,6 @@ const View = {
             .always(() => { });
     }
 
-    function getExecutive(){
-        Api.Executive.GetAll()
-            .done(res => {
-                View.Data.Executive = res.data;
-            })
-            .fail(err => { IndexView.helper.showToastError('Error', 'Có lỗi sảy ra'); })
-            .always(() => { });
-    }
     
     function debounce(f, timeout) {
         let isLock = false;

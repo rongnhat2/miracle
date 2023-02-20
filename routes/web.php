@@ -18,7 +18,7 @@ Route::get('/login', 'Customer\DisplayController@login')->name('customer.view.lo
 Route::get('/register', 'Customer\DisplayController@register')->name('customer.view.register');
 Route::get('/about', 'Customer\DisplayController@about')->name('customer.view.about');
 Route::get('/category', 'Customer\DisplayController@category')->name('customer.view.category');
-Route::get('/product', 'Customer\DisplayController@product')->name('customer.view.product');
+Route::get('/product/{id}-{slug}', 'Customer\DisplayController@product')->name('customer.view.product');
 Route::get('/news', 'Customer\DisplayController@news')->name('customer.view.news');
 Route::get('/contact', 'Customer\DisplayController@contact')->name('customer.view.contact');
 
@@ -34,6 +34,12 @@ Route::prefix('customer')->group(function () {
         Route::prefix('category')->group(function () {
             Route::get('/get', 'Admin\CategoryController@get')->name('admin.category.get');
         });
+        Route::prefix('product')->group(function () {
+            Route::get('/get-best-discount', 'Customer\ProductController@get_best_discount')->name('admin.product.get');
+            Route::get('/get-new-item', 'Customer\ProductController@get_new_item')->name('admin.product.get');
+            Route::get('/get-one/{id}', 'Customer\ProductController@get_one')->name('admin.product.get');
+            Route::get('/get-category', 'Customer\ProductController@get_category')->name('admin.product.get');
+        });
     });
 });
 
@@ -46,12 +52,16 @@ Route::middleware(['AuthAdmin:admin'])->group(function () {
 
         Route::prefix('product')->group(function () {
             Route::get('/', 'Admin\ProductController@index')->name('admin.product.index');
+            Route::get('refresh', 'Admin\ProductController@refresh_slug')->name('admin.product.get');
         });
         Route::prefix('category')->group(function () {
             Route::get('/', 'Admin\CategoryController@index')->name('admin.category.index');
         });
         Route::prefix('branch')->group(function () {
             Route::get('/', 'Admin\BranchController@index')->name('admin.branch.index');
+        });
+        Route::prefix('discount')->group(function () {
+            Route::get('/', 'Admin\DiscountController@index')->name('admin.discount.index');
         });
         Route::prefix('warehouse')->group(function () {
             Route::get('/', 'Admin\WarehouseController@index')->name('admin.warehouse.index');
@@ -69,6 +79,7 @@ Route::middleware(['AuthAdmin:admin'])->group(function () {
             Route::get('/get-one/{id}', 'Admin\CategoryController@get_one')->name('admin.category.get_one');
             Route::post('/update', 'Admin\CategoryController@update')->name('admin.category.update');
             Route::get('/delete/{id}', 'Admin\CategoryController@delete')->name('admin.category.delete');
+            Route::put('/update-trending', 'Admin\CategoryController@update_trending')->name('admin.category.trending.update');
         });
         
         Route::prefix('product')->group(function () {
@@ -77,6 +88,7 @@ Route::middleware(['AuthAdmin:admin'])->group(function () {
             Route::get('/get-one/{id}', 'Admin\ProductController@get_one')->name('admin.product.get_one');
             Route::post('/update', 'Admin\ProductController@update')->name('admin.product.update');
             Route::get('/delete/{id}', 'Admin\ProductController@delete')->name('admin.product.delete');
+            Route::put('/update-trending', 'Admin\ProductController@update_trending')->name('admin.product.trending.update');
         });
         
         Route::prefix('branch')->group(function () {
@@ -98,6 +110,13 @@ Route::middleware(['AuthAdmin:admin'])->group(function () {
             Route::get('/get-one/{id}', 'Admin\WarehouseController@get_one')->name('admin.warehouse.get_one');
             Route::post('/update', 'Admin\WarehouseController@update')->name('admin.warehouse.update');
             Route::get('/delete/{id}', 'Admin\WarehouseController@delete')->name('admin.warehouse.delete');
+        });
+
+        Route::prefix('discount')->group(function () {
+            Route::get('get', 'Admin\DiscountController@get')->name('admin.discount.get'); 
+            Route::get('get-discount', 'Admin\DiscountController@get_discount')->name('admin.discount.get_discount'); 
+            Route::post('/store', 'Admin\DiscountController@store')->name('admin.discount.store');
+            Route::get('/delete/{id}', 'Admin\DiscountController@delete')->name('admin.discount.delete');
         });
 
         Route::prefix('layout')->group(function () {

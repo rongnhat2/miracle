@@ -29,15 +29,8 @@ class CategoryController extends Controller
         return $this->category->send_response(201, $data, null);
     }
     public function get_one($id){
-        $data       = $this->event->get_one($id);
-        $data_en    = $this->event->get_lang($id, 1);
-        $data_vi    = $this->event->get_lang($id, 2);
-        $data_response = [
-            "data"      => $data,
-            "data_en"   => $data_en,
-            "data_vi"   => $data_vi,
-        ];
-        return $this->event->send_response(200, $data_response, null);
+        $data       = $this->category->get_one($id); 
+        return $this->category->send_response(200, $data, null);
     }
  
     public function store(Request $request){  
@@ -55,39 +48,23 @@ class CategoryController extends Controller
     }
     public function update(Request $request){   
         $data_item = [ 
-            "executive_id"  => $request->data_writer,
-            "link_url"      => $request->data_link,  
+            "name"      => $request->data_name,  
+            "slug"      => $this->category->to_slug($request->data_name),
+            "icon"      => $request->data_icon,  
         ];
-        if ($request->data_image != "null") {
-            $data_item["image"] = $this->event->imageInventor('image-upload', $request->data_image, 1920);
-        }
-        $this->event->update($data_item, $request->data_id);
+        if ($request->data_image != "null") { $data_item["image"] = $this->category->imageInventor('image-category', $request->data_image, 1920); }
+        $this->category->update($data_item, $request->data_id);
 
-        $data_en = [ 
-            "title"              => $request->data_title_en,  
-            "description"          => $request->data_description_en,  
-            "detail"          => $request->data_detail_en,  
-        ];
-        $this->eventLang->update($data_en, $request->data_id_en); 
-
-        $data_vi = [ 
-            "title"              => $request->data_title_vi,  
-            "description"          => $request->data_description_vi,  
-            "detail"          => $request->data_detail_vi,  
-        ];
-        $this->eventLang->update($data_vi, $request->data_id_vi); 
-
-        return $this->event->send_response(200, null, null);
+        return $this->category->send_response(200, null, null);
     }
 
     public function delete($id){
-        $this->event->delete($id); 
-        $this->event->delete_lang($id); 
-        return $this->event->send_response(200, "Delete successful", null);
+        $this->category->delete($id); 
+        return $this->category->send_response(200, "Delete successful", null);
     }
     public function update_trending(Request $request){
-        $this->event->update_trending($request->id);
-        return $this->event->send_response(200, null, null);
+        $this->category->update_trending($request->id);
+        return $this->category->send_response(200, null, null);
     }
 
 }

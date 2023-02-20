@@ -299,10 +299,16 @@ const View = {
 
     View.TabData.onChange("Item", () => {
         View.tableData.init();
+        View.FullTab.doShow("Table");
+        View.FullTab.default("Create");
+        View.FullTab.default("Update");
         getData();
     })
     View.TabData.onChange("History", () => {
         View.tableHistory.init();
+        View.FullTab.doShow("Table");
+        View.FullTab.default("Create");
+        View.FullTab.default("Update");
         getHistory();
     })
 
