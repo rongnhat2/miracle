@@ -103,7 +103,7 @@
                                 <!--~./ header card area ~-->
 
                                 <div class="header-card-area">
-                                    <a href="{{ route("customer.view.login") }}">
+                                    <a href="{{ $customer_data['is_login'] ? route("customer.view.profile") : route("customer.view.login") }}">
                                         <span class="icon-user-silhouette"></span>
                                     </a>
                                 </div>
@@ -292,6 +292,7 @@
     <script src="{{ asset("customer/assets/js/datepicker.min.js") }}"></script>
     <script src="{{ asset("customer/assets/js/main.js") }}"></script><!-- main-js -->
     <script src="{{ asset("customer/assets/js/api.js") }}"></script><!-- api-js -->
+    <script src="{{ asset("customer/assets/js/window.js") }}"></script><!-- api-js -->
     @yield('js')
 </body>
 

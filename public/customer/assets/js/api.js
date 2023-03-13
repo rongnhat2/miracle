@@ -1,4 +1,5 @@
 const Api = {
+    Auth: {},  
     Category: {},  
     Product: {},  
 
@@ -14,6 +15,50 @@ const Api = {
     });
 })();
  
+//Auth
+(() => {
+    Api.Auth.onRegister = (data) => $.ajax({
+        url: `/customer/apip/auth/register`,
+        method: 'POST',
+        data: data,
+        contentType: false,
+        processData: false,
+    }); 
+    Api.Auth.onLogin = (data) => $.ajax({
+        url: `/customer/apip/auth/login`,
+        method: 'POST',
+        data: data,
+        contentType: false,
+        processData: false,
+    }); 
+    Api.Auth.onForgot = (data) => $.ajax({
+        url: `/customer/apip/auth/forgot`,
+        method: 'POST',
+        data: data,
+        contentType: false,
+        processData: false,
+    }); 
+    Api.Auth.onReset = (data) => $.ajax({
+        url: `/customer/apip/auth/update`,
+        method: 'POST',
+        data: data,
+        contentType: false,
+        processData: false,
+    }); 
+    Api.Auth.onUpdateProfile = (data) => $.ajax({
+        url: `/customer/apip/auth/update-profile`,
+        method: 'POST',
+        data: data,
+        contentType: false,
+        processData: false,
+    }); 
+
+
+    Api.Auth.GetUserInfo = () => $.ajax({
+        url: `/customer/apip/auth/get`,
+        method: 'GET',
+    });
+})();
 
 
 //Category

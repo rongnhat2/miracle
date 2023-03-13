@@ -20,7 +20,7 @@ const View = {
                                             <span class="cat-status popular">popular</span>
                                         </div>
                                         <div class="food-info">
-                                            <h3 class="food-title"><a href="#">${v.data_product.name}</a>
+                                            <h3 class="food-title"><a href="/product/${v.data_product.id}-${v.data_product.slug}">${v.data_product.name}</a>
                                             </h3>
                                             <div class="food-footer-info">
                                                 <div class="food-price">10.<sup>00£</sup></div>

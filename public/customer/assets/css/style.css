@@ -13982,6 +13982,14 @@ body.sidemenu-active #pp-nav.right {
 }
 .food-grid-item.grid-style-five.gird-style .food-info p {
   line-height: 1.75em;
+  
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 25px;
+  -webkit-line-clamp: 3;
+  height: 75px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
 }
 .food-grid-item.grid-style-five.gird-style .food-info .read-more {
   font-size: 12px;

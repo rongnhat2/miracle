@@ -1,5 +1,5 @@
 @extends('customer.layout')
-@section('title', "Login")
+@section('title', "Register")
 
 
 @section('css')
@@ -15,12 +15,12 @@
                 <div class="col-12">
                     <div class="page-header-content text-center">
                         <div class="page-header-caption">
-                            <h2 class="page-title">Sign In</h2>
+                            <h2 class="page-title">Sign Up</h2>
                         </div>
                         <div class="breadcrumb-area">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/">Home</a></li>
-                                <li class="breadcrumb-item active">login</li>
+                                <li class="breadcrumb-item active">Register</li>
                             </ol>
                         </div>
                         <!--~~./ breadcrumb-area ~~-->
@@ -40,9 +40,10 @@
                         <div class="user-register-area">
                             <div class="register-bg-left bg-image" style="background-image:url('{{ asset("customer/assets/images/bg/register-bg-left.jpg") }}')"></div>
                             <div class="form-content">
-                                <div class="form-content-signin">
+                                <div class="form-content-signin" id="register-form">
                                     <h3 class="form-heading">Register your account</h3>
-                                    <form class="default-form signin-form">
+                                    <div class="default-form signin-form">
+                                        <div class="error-log"></div>
                                         <div class="form-group">
                                             <input id="name" name="name" class="form-controllar" type="text" placeholder="Username">
                                         </div>
@@ -59,7 +60,7 @@
                                         <!--/.form-group-->
 
                                         <div class="form-btn-group">
-                                            <button type="submit" class="btn btn-default">
+                                            <button type="button" class="btn btn-default bth-action" atr="Register">
                                                 Register
                                             </button>
                                             <div class="forget-pass">
@@ -67,22 +68,8 @@
                                             </div>
                                         </div>
                                         <div class="form-btn-group">
-                                        </div>
-                                        <div class="reg-others-midea">
-                                            <div class="text">
-                                                Or Login With
-                                            </div>
-                                            <div class="midea-icons">
-                                                <ul class="social-share">
-                                                    <li><a class="facebook" href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                                    <li><a class="twitter" href="#"><i class="fab fa-twitter"></i></a>
-                                                    </li>
-                                                    <li><a class="google-plus" href="#"><i class="fab fa-google-plus-g"></i></a></li>
-                                                    <li><a class="linkedin" href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </form>
+                                        </div> 
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -95,5 +82,5 @@
 @endsection()
 
 @section('js')
-    <script src="{{ asset('customer/assets/js/page/index.js') }}"></script>
+    <script src="{{ asset('customer/assets/js/page/auth.js') }}"></script>
 @endsection()

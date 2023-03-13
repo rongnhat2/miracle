@@ -1,5 +1,5 @@
 @extends('customer.layout')
-@section('title', "Trang chủ")
+@section('title', "Home")
 
 
 @section('css')

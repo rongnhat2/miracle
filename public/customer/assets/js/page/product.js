@@ -7,6 +7,7 @@ const View = {
             $(".product-prices").html(data.data_discount == 0 
                     ? `${data.data_product.prices}$` 
                     : `<del>${data.data_product.prices}<sup>$</sup></del> ${data.data_product.prices - (data.data_product.prices * data.data_discount / 100)}<sup>$</sup>`)
+            $(".thumbnails-wrapper-area img").attr("src", `/${data.data_product.image}`);
 
         }
     },

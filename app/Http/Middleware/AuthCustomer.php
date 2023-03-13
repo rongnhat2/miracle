@@ -16,10 +16,10 @@ class AuthCustomer
     {
         $token = $request->cookie('_token_');
         // vào UI login
-        if ($middleware == 'auth') {
+        if ($middleware == 'auth') { 
             if ($token) {
                 list($user_id, $token) = explode('$', $request->cookie('_token_'), 2);
-                $sql_getAuth    = 'SELECT * FROM customer_auth WHERE id = "'.$user_id.'"';
+                $sql_getAuth    = 'SELECT * FROM customer WHERE id = "'.$user_id.'"';
                 $hasAuth        = DB::select($sql_getAuth);
                 if (count($hasAuth) > 0) {
                     if (Hash::check($user_id . '$' . $hasAuth[0]->secret_key, $token)) {
@@ -38,7 +38,7 @@ class AuthCustomer
         }else{ 
             if ($token) {
                 list($user_id, $token) = explode('$', $request->cookie('_token_'), 2);
-                $sql_getAuth    = 'SELECT * FROM customer_auth WHERE id = "'.$user_id.'"';
+                $sql_getAuth    = 'SELECT * FROM customer WHERE id = "'.$user_id.'"';
                 $hasAuth    = DB::select($sql_getAuth);
                 if (count($hasAuth) > 0) {
                     // Kiểm tra phiên đăng nhập hiện tại

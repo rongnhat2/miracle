@@ -13,21 +13,51 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'Customer\DisplayController@index')->name('customer.view.index');
-Route::get('/login', 'Customer\DisplayController@login')->name('customer.view.login');
-Route::get('/register', 'Customer\DisplayController@register')->name('customer.view.register');
+Route::get('/', 'Customer\DisplayController@index')->name('customer.view.index'); 
 Route::get('/about', 'Customer\DisplayController@about')->name('customer.view.about');
 Route::get('/category', 'Customer\DisplayController@category')->name('customer.view.category');
 Route::get('/product/{id}-{slug}', 'Customer\DisplayController@product')->name('customer.view.product');
 Route::get('/news', 'Customer\DisplayController@news')->name('customer.view.news');
 Route::get('/contact', 'Customer\DisplayController@contact')->name('customer.view.contact');
 
+
+Route::middleware(['AuthCustomer:auth'])->group(function () {
+    // đăng nhập
+    Route::get('/login', 'Customer\DisplayController@login')->name('customer.view.login');
+    // đăng kí
+    Route::get('/register', 'Customer\DisplayController@register')->name('customer.view.register'); 
+    // quên mật khẩu
+    Route::get('/forgot', 'Customer\DisplayController@forgot')->name('customer.view.forgot');
+    // quên mật khẩu
+    Route::get('/password-update', 'Customer\DisplayController@password_update')->name('customer.view.password_update');
+});
+Route::middleware(['AuthCustomer:logined'])->group(function () { 
+    Route::post('logout', 'Customer\AuthController@logout')->name('customer.logout');
+    Route::get('profile', 'Customer\DisplayController@profile')->name('customer.view.profile');
+}); 
+Route::prefix('customer')->group(function () {
+    Route::prefix('apip')->group(function () {
+        Route::prefix('auth')->group(function () {
+            Route::post('register', 'Customer\AuthController@register')->name('customer.auth.register');
+            Route::post('login', 'Customer\AuthController@login')->name('customer.auth.login');
+            Route::post('forgot', 'Customer\AuthController@forgot')->name('customer.auth.forgot');
+            Route::post('update', 'Customer\AuthController@update')->name('customer.auth.update');
+            Route::post('update-profile', 'Customer\AuthController@update_profile')->name('customer.auth.profile.update');
+
+            Route::get('get', 'Customer\AuthController@get')->name('customer.auth.get');
+        });
+         
+    });
+});
+
+
+
 Route::middleware(['AuthAdmin:auth'])->group(function () {
     Route::prefix('admin')->group(function () {
         Route::get('/login', 'Admin\DisplayController@login')->name('admin.login');
         Route::post('/login', 'Admin\AuthController@login')->name('admin.login');
     });
-});
+}); 
 
 Route::prefix('customer')->group(function () {
     Route::prefix('apip')->group(function () {

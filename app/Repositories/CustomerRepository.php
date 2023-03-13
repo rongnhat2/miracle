@@ -32,6 +32,15 @@ class CustomerRepository extends BaseRepository implements RepositoryInterface
                     ->first(); 
     }
 
+    public function checkEmailPassword($request){
+        $user = $this->model->where('email', '=', $request->data_email)->first();
+        if ($user) {
+            return Hash::check($request->data_password, $user->password) ? $user->id : false;
+        }else{
+            return false;
+        }
+    }
+
 
     public function check_email($email){
         return $this->model->where('email', '=', $email)->first() ? true : false;
