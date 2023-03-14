@@ -4,6 +4,7 @@ const Api = {
     Branch: {},  
     Warehouse: {},  
     Discount: {},
+    Order: {},
 
     Image: {},
     
@@ -172,6 +173,33 @@ const Api = {
     });
 })();
 
+
+//Order
+(() => {
+    Api.Order.GetAll = (id) => $.ajax({
+        url: `/apip/order/get`,
+        method: 'GET',
+        dataType: 'json',
+        data: {
+            id: id ?? '',
+        }
+    });
+    Api.Order.GetOne = (id) => $.ajax({
+        url: `/apip/order/get-one`,
+        method: 'GET',
+        dataType: 'json',
+        data: {
+            id: id ?? '',
+        }
+    });
+    Api.Order.Update = (data) => $.ajax({
+        url: `/apip/order/update`,
+        method: 'POST',
+        data: data,
+        contentType: false,
+        processData: false,
+    });
+})();
 
 // Image
 (() => {

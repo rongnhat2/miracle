@@ -23,7 +23,7 @@ const View = {
                                             <h3 class="food-title"><a href="/product/${v.data_product.id}-${v.data_product.slug}">${v.data_product.name}</a>
                                             </h3>
                                             <div class="food-footer-info">
-                                                <div class="food-price">10.<sup>00£</sup></div>
+                                                <div class="food-price">${v.data_product.prices}$</sup></div>
                                                 <div class="rating">
                                                     <ul class="list">
                                                         <li class="yellow"><span class="fas fa-star"></span></li>

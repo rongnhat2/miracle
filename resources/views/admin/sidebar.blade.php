@@ -26,7 +26,7 @@
                 </ul>
             </li> 
             <li class="nav-item dropdown product-group">
-                <a class="dropdown-toggle product" href="{{ route('admin.product.index') }}">
+                <a class="dropdown-toggle product" href="{{ route('admin.order.index') }}">
                     <span class="icon-holder">
                         <i class="anticon anticon-file-text"></i>
                     </span>
