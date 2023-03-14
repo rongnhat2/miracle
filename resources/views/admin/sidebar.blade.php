@@ -25,8 +25,8 @@
                     <li class="discount"> <a href="{{ route('admin.discount.index') }}">Giảm giá</a> </li>
                 </ul>
             </li> 
-            <li class="nav-item dropdown product-group">
-                <a class="dropdown-toggle product" href="{{ route('admin.order.index') }}">
+            <li class="nav-item dropdown order-group">
+                <a class="dropdown-toggle order" href="{{ route('admin.order.index') }}">
                     <span class="icon-holder">
                         <i class="anticon anticon-file-text"></i>
                     </span>

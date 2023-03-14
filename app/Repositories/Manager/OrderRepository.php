@@ -53,9 +53,8 @@ class OrderRepository extends BaseRepository implements RepositoryInterface
     public function get_detail($id){
         $sql = "SELECT order_detail.*,
                         product.name,
-                        product.images ,
+                        product.image ,
                         product.prices as product_prices ,
-                        product.defaul_prices as product_defaul_prices ,
                         warehouse.quantity as warehouse_quatity
                     FROM order_detail 
                     LEFT JOIN product
@@ -66,17 +65,17 @@ class OrderRepository extends BaseRepository implements RepositoryInterface
         return DB::select($sql);
     }
     public function get_one($id){
-        $sql = "SELECT full_order.*, customer_detail.avatar
+        $sql = "SELECT full_order.*
                     FROM full_order 
                     LEFT JOIN customer_detail
-                    ON customer_detail.customer_auth_id = full_order.customer_id
+                    ON customer_detail.customer_id = full_order.customer_id
                     WHERE full_order.id = ".$id;
         return DB::select($sql);
     } 
     public function remove_cart($customer_id){
         $sql = "UPDATE customer_detail
                     SET cart = null
-                    WHERE customer_auth_id = ".$customer_id;
+                    WHERE customer_id = ".$customer_id;
         return DB::select($sql);
     }
 
