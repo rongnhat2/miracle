@@ -135,9 +135,12 @@
                                 Shipping
                             </div>
                             <div class="order-nav-item" order-status="5">
-                                Done
+                                Shipped
                             </div>
                             <div class="order-nav-item" order-status="6">
+                                Done
+                            </div>
+                            <div class="order-nav-item" order-status="7">
                                 Cancel
                             </div>
                         </div>  

@@ -67,7 +67,7 @@ class OrderController extends Controller
             "The shipper is picking up the goods", 
             "Shipper is shipping",
             "Has received the goods",
-            "The order has ended, thank you for your purchase",
+            "The order has ended - thank you for your purchase",
             "Cancelled",
         ];
         $order = $this->order->get_one($order_id);

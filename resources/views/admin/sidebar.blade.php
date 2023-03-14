@@ -1,14 +1,14 @@
 <div class="side-nav">
     <div class="side-nav-inner">
         <ul class="side-nav-menu scrollable">  
-            <li class="nav-item dropdown statistic-group">
+           {{--  <li class="nav-item dropdown statistic-group">
                 <a class="dropdown-toggle statistic" href="{{ route('admin.product.index') }}">
                     <span class="icon-holder">
                         <i class="anticon anticon-area-chart"></i>
                     </span>
                     <span class="title">Thống kê</span>
                 </a>
-            </li>
+            </li> --}}
             <li class="nav-item dropdown manager-group">
                 <a class="dropdown-toggle" href="javascript:void(0);">
                     <span class="icon-holder">
@@ -49,7 +49,7 @@
                     <span class="title">Kho hàng</span>
                 </a>
             </li>
-            <li class="nav-item dropdown manager-group">
+            {{-- <li class="nav-item dropdown manager-group">
                 <a class="dropdown-toggle manager" href="{{ route('admin.branch.index') }}">
                     <span class="icon-holder">
                         <i class="anticon anticon-user"></i>
@@ -64,7 +64,7 @@
                     </span>
                     <span class="title">Khách hàng</span>
                 </a>
-            </li>
+            </li> --}}
             {{-- <li class="nav-item d-none dropdown news-group">
                 <a class="dropdown-toggle news" href="{{ route('admin.news.index') }}">
                     <span class="icon-holder">

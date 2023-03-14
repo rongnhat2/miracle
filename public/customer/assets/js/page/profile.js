@@ -60,6 +60,7 @@ const View = {
 				"fulfill",
 				"shipping",
 				"shiped",
+				"done",
 				"cancel",
 			];
 			var order_status_text = [
@@ -69,6 +70,7 @@ const View = {
 				"fulfill",
 				"shipping",
 				"shiped",
+				"done",
 				"cancel",
 			];
 			$(".order-item-list .order-item-wrapper").remove();
@@ -117,6 +119,7 @@ const View = {
 				"fulfill",
 				"shipping",
 				"shiped",
+				"done",
 				"cancel",
 			];
 			var order_status_text = [
@@ -126,6 +129,7 @@ const View = {
 				"fulfill",
 				"shipping",
 				"shiped",
+				"done",
 				"cancel",
 			];
 			var payment = [
