@@ -64,6 +64,7 @@
         </div><!-- /preloader-inner -->
     </div><!-- /preloader -->
 
+        <input type="hidden" class="auth-value" id="auth-value" value="<?php echo $customer_data['is_login']; ?>">
     <div class="site-content">
         <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
             Start Site Header
@@ -94,10 +95,10 @@
                             <div class="header-right-area">
                                 <div class="intro-content-info"><span>Call free:</span> 001-23456789</div>
 
-                                <div class="header-card-area">
-                                    <a href="#">
+                                <div class="header-card-area cart-count">
+                                    <a href="{{ route("customer.view.cart") }}">
                                         <span class="icon-paper-bag"></span>
-                                        <sup>0</sup>
+                                        <sup class="count">0</sup>
                                     </a>
                                 </div>
                                 <!--~./ header card area ~-->

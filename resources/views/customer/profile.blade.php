@@ -43,10 +43,10 @@
                     </div>
                 </div>
                 <div class="profile-action-wrapper">
-                    <div class="action-item is-select" tab-item="Information"><i class="fas fa-user"></i>Thông tin cá nhân</div>
-                    <div class="action-item" tab-item="Order"><i class="fas fa-clipboard-list"></i>Đơn mua</div>
-                    <div class="action-item" tab-item="Password"><i class="fas fa-key"></i> Đổi mật khẩu</div>
-                    <div class="action-item" onclick="event.preventDefault();document.getElementById('logout-form').submit(); localStorage.removeItem('card')"><i class="fas fa-sign-out-alt"></i>Đăng xuất</div>
+                    <div class="action-item is-select" tab-item="Information"><i class="fas fa-user"></i>Profile</div>
+                    <div class="action-item" tab-item="Order"><i class="fas fa-clipboard-list"></i>Order </div>
+                    <div class="action-item" tab-item="Password"><i class="fas fa-key"></i> Change password</div>
+                    <div class="action-item" onclick="event.preventDefault();document.getElementById('logout-form').submit(); localStorage.removeItem('card')"><i class="fas fa-sign-out-alt"></i>Logout</div>
                     <form id="logout-form" action="{{ route('customer.logout') }}" method="POST" class="d-none"> @csrf </form>
                 </div>
             </div>
@@ -66,8 +66,7 @@
                 <div class="profile-data-block is-open" tab-data="Information">
                     <div class="profile-wrapper">
                         <div class="profile-header">
-                            <h3>Hồ sơ của tôi</h3>
-                            <p>Quản lý thông tin hồ sơ để bảo mật tài khoản</p>
+                            <h3>My profile</h3>
                         </div>  
                         <div class="profile-body">
                             <div class="row">
@@ -83,7 +82,7 @@
                                     </div>
                                     <div class="profile-component">
                                         <div class="profile-title">
-                                            Họ và tên
+                                            Username
                                         </div>
                                         <div class="profile-value">
                                             <input type="text" value=" " class="data-name">
@@ -91,7 +90,7 @@
                                     </div>
                                     <div class="profile-component">
                                         <div class="profile-title">
-                                            Địa chỉ
+                                            Address
                                         </div>
                                         <div class="profile-value">
                                             <input type="text" value=" >" class="data-address">
@@ -99,7 +98,7 @@
                                     </div>
                                     <div class="profile-component">
                                         <div class="profile-title">
-                                            Số điện thoại
+                                            Telephone
                                         </div>
                                         <div class="profile-value">
                                             <input type="text" value=" " class="data-phone">
@@ -115,14 +114,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </form>
-                                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5 avatar-wrapper">
-                                    <div>
-                                        <div class="image-wrapper"> </div>
-                                        <label for="avatar">Chọn ảnh</label>
-                                        <input type="file" id="avatar" style="display: none;">
-                                    </div>
-                                </div>
+                                </form> 
                             </div>
                         </div>
                     </div>  
@@ -131,22 +123,22 @@
                     <div class="order-wrapper">
                         <div class="order-nav">
                             <div class="order-nav-item is-select">
-                                Tất cả
+                                All
                             </div>
                             <div class="order-nav-item" order-status="0">
-                                Chờ xác nhận
+                                Pending
                             </div>
                             <div class="order-nav-item" order-status="2">
-                                Chờ lấy hàng
+                                Get Product
                             </div>
                             <div class="order-nav-item" order-status="4">
-                                Đang giao
+                                Shipping
                             </div>
                             <div class="order-nav-item" order-status="5">
-                                Đã giao
+                                Done
                             </div>
                             <div class="order-nav-item" order-status="6">
-                                Đã hủy
+                                Cancel
                             </div>
                         </div>  
                         <div class="order-main">
@@ -162,8 +154,7 @@
                 <div class="profile-data-block " tab-data="Password">
                     <div class="profile-wrapper">
                         <div class="profile-header">
-                            <h3>Quản lý mật khẩu</h3>
-                            <p>Quản lý thông tin hồ sơ để bảo mật tài khoản</p>
+                            <h3>Change password</h3>
                         </div>  
                         <div class="profile-body">
                             <div class="row">
@@ -171,7 +162,7 @@
                                     <div class="error-log"></div>
                                     <div class="profile-component">
                                         <div class="profile-title">
-                                            Mật khẩu cũ
+                                            Old Password
                                         </div>
                                         <div class="profile-value">
                                             <input type="password" value="" class="data-oldpass">
@@ -179,18 +170,10 @@
                                     </div>
                                     <div class="profile-component">
                                         <div class="profile-title">
-                                            Mật khẩu mới
+                                            new Password
                                         </div>
                                         <div class="profile-value">
                                             <input type="password" value="" class="data-newpass">
-                                        </div>
-                                    </div>
-                                    <div class="profile-component">
-                                        <div class="profile-title">
-                                            Mã xác minh
-                                        </div>
-                                        <div class="profile-value">
-                                            <input type="text" value="" class="data-code">
                                         </div>
                                     </div>
                                     <div class="profile-component">
@@ -199,7 +182,7 @@
                                         </div>
                                         <div class="profile-value">
                                             <div class="action-save" atr="Send">
-                                                Gửi mã xác thực
+                                                Confirm
                                             </div>
                                         </div>
                                     </div>
@@ -211,11 +194,11 @@
             </div>
             <div class="profile-data-wrapper order-tab-wrapper" view-data="OrderDetail">
                 <div class="go-back">
-                    <div class="do-action"><i class="fas fa-caret-left mr-2"></i>Quay lại</div>
+                    <div class="do-action"><i class="fas fa-caret-left mr-2"></i>Back</div>
                 </div>
                 <div class="profile-data-block is-open">
                     <div class="order-procedure-wrapper">
-                        <h5 class="title">Thông tin nhận hàng</h5>
+                        <h5 class="title">Order Detail</h5>
                         <div class="row description-wrapper">
                             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
                                 <div class="user-data">

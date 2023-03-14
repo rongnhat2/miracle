@@ -2,6 +2,7 @@ const Api = {
     Auth: {},  
     Category: {},  
     Product: {},  
+    Order: {},  
 
     Image: {},
     
@@ -15,6 +16,25 @@ const Api = {
     });
 })();
  
+// Order
+(() => {
+    Api.Order.Checkout = (data) => $.ajax({
+        url: `/customer/apip/order/checkout`,
+        method: 'POST',
+        data: data,
+        contentType: false,
+        processData: false,
+    });
+    Api.Order.GetOrder = (tab) => $.ajax({
+        url: `/customer/apip/order/get`,
+        method: 'GET',
+        dataType: 'json',
+        data: {
+            tab: tab ?? null,
+        }
+    });
+})();
+
 //Auth
 (() => {
     Api.Auth.onRegister = (data) => $.ajax({

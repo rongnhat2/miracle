@@ -64,14 +64,9 @@
                             </div>
                             <form action="#">
                                 <div class="food-detail-bottom">
-                                    <div class="input-spinner number">
-                                        <a href="javascript:void(0)" class="minus">-</a>
-                                        <input id="food-number" type="text" value="1">
-                                        <a href="javascript:void(0)" class="plus">+</a>
-                                    </div>
                                     <!--/.input-spinner-->
                                     <div class="share-and-whishlist">
-                                        <a class="add-to-cart" href="#"><span class="fas fa-shopping-cart"></span></a>
+                                        <a class="add-to-cart action-add-to-card" atr="Add to card" data-id="" href="#"><span class="fas fa-shopping-cart"></span></a>
                                     </div>
                                 </div>
                             </form>

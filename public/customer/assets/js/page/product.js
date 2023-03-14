@@ -8,6 +8,15 @@ const View = {
                     ? `${data.data_product.prices}$` 
                     : `<del>${data.data_product.prices}<sup>$</sup></del> ${data.data_product.prices - (data.data_product.prices * data.data_discount / 100)}<sup>$</sup>`)
             $(".thumbnails-wrapper-area img").attr("src", `/${data.data_product.image}`);
+            $(".share-and-whishlist a").attr("data-id", data.data_product.id);
+
+            var cards = localStorage.getItem("miracle-card") == null ? "" : localStorage.getItem("miracle-card").split(",");
+            if (cards.includes(data.data_product.id+"")) {
+                $(".action-add-to-card").html(`<i class="fas fa-check"></i>`)
+                $(".action-add-to-card").removeClass("action-add-to-card")
+            }else{
+                $(".action-add-to-card").html(`<span class="fas fa-shopping-cart"></span>`)
+            }
 
         }
     },

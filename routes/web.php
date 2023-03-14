@@ -18,6 +18,8 @@ Route::get('/about', 'Customer\DisplayController@about')->name('customer.view.ab
 Route::get('/category', 'Customer\DisplayController@category')->name('customer.view.category');
 Route::get('/product/{id}-{slug}', 'Customer\DisplayController@product')->name('customer.view.product');
 Route::get('/news', 'Customer\DisplayController@news')->name('customer.view.news');
+Route::get('/cart', 'Customer\DisplayController@cart')->name('customer.view.cart');
+Route::get('/checkout', 'Customer\DisplayController@checkout')->name('customer.view.checkout');
 Route::get('/contact', 'Customer\DisplayController@contact')->name('customer.view.contact');
 
 
@@ -70,6 +72,10 @@ Route::prefix('customer')->group(function () {
             Route::get('/get-one/{id}', 'Customer\ProductController@get_one')->name('admin.product.get');
             Route::get('/get-category', 'Customer\ProductController@get_category')->name('admin.product.get');
         });
+        Route::prefix('order')->group(function () {
+            Route::post('checkout', 'Customer\OrderController@checkout')->name('customer.order.checkout');
+            Route::get('get', 'Customer\OrderController@get')->name('customer.order.get');
+        }); 
     });
 });
 

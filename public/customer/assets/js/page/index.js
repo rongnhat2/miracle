@@ -67,10 +67,17 @@ const View = {
                                 <p>${data.description}</p>
                                 <div class="btn-group-default">
                                     <a href="/product/${data.id}-${data.slug}" class="btn btn-default btn-black">VIEW PRODUCT</a>
-                                    <a href="#" class="btn btn-default">ADD TO CART</a>
+                                    <a href="#" class="btn btn-default action-add-to-card" atr="Add to card" data-id="${data.id}">ADD TO CART</a>
                                 </div>
                             </div>
                         </div>`)
+            var cards = localStorage.getItem("miracle-card") == null ? "" : localStorage.getItem("miracle-card").split(",");
+            if (cards.includes(data.id+"")) {
+                $(".action-add-to-card").html(`<i class="fas fa-check"></i>`)
+                $(".action-add-to-card").removeClass("action-add-to-card")
+            }else{
+                $(".action-add-to-card").html(`<span class="fas fa-shopping-cart"></span>`)
+            }
         },
         newItem(data){
             data.map(v => {
@@ -81,7 +88,7 @@ const View = {
                                         <img src="${v.data_product.image}">
                                     </div>
                                     <div class="food-info">
-                                        <h3 class="food-title"><a href="/product/${v.data_product.id}-${v.data_product.slug}">Mozzarella Sticks</a>
+                                        <h3 class="food-title"><a href="/product/${v.data_product.id}-${v.data_product.slug}">${v.data_product.name}</a>
                                         </h3>
                                         <div class="food-footer-info">
                                             <div class="food-price">${v.data_product.prices}$</div>
@@ -94,7 +101,6 @@ const View = {
                                 </div>
                             </div>`) 
             })
-           
         }
     },
     init(){

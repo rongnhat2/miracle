@@ -26,13 +26,78 @@ const IndexView = {
             });
         });
     },
+    Cart: { 
+        add_to_card(name, callback){
+            $(document).on('click', `.action-add-to-card`, function() {
+                if($(this).attr('atr').trim() == name) {
+                    callback($(this));
+                }
+            });
+        },
+        update(){
+            var card_data = localStorage.getItem("miracle-card")
+            var count = (card_data == null || card_data == "") ? 0 : card_data.split(",").length;
+            $(".cart-count .count").html(count)
+        }
+    },
     init(){
         setInterval(function() {
             IndexView.ImageDelay();
         }, 1000); 
+        IndexView.Cart.update();
     }
 };
 (() => {
+    IndexView.Cart.add_to_card("Add to card", (item) => {
+        var card        = localStorage.getItem("miracle-card"); 
+        var data_id     = item.attr("data-id");
+        if (card == null || card == "") {
+            localStorage.setItem("miracle-card", data_id);  
+        }else{
+            var card_array  = card.split(",");
+            hasId = card_array.includes(data_id)
+            if (!hasId) {
+                card_array.push(data_id) 
+                localStorage.setItem("miracle-card", card_array.toString()); 
+            }
+        }
+        // if (IndexView.Auth.isLogin()) updateCartUser();
+        item.html(`<i class="fas fa-check"></i>`)
+        IndexView.Cart.update();
+    })
+
+    function getCart(){
+        if (IndexView.Auth.isLogin()) {
+            Api.Cart.GetCart()
+                .done(res => { 
+                    if (res.status == 200) {
+                        var cart = localStorage.getItem("miracle-card") == null ? [] : localStorage.getItem("miracle-card").split(","); 
+                        if (res.data.cart != null) {
+                            res.data.cart.split(",").map(v => {
+                                cart.includes(v) ? "" : cart.push(v);
+                            })
+                            localStorage.setItem("miracle-card", cart);
+                        }
+                        updateCartUser();
+                    }else{
+                        redirect_logined(res.data)
+                    }
+                })
+        }
+    }
+    function updateCartUser(){
+        var cart = localStorage.getItem("miracle-card");
+        if (cart != null) {
+            var fd = new FormData();
+            fd.append('cart', cart); 
+            Api.Cart.Update(fd)
+                .done(res => {
+                    IndexView.Cart.update();
+                })
+                .fail(err => {  })
+                .always(() => { });
+        }
+    }
     $(".account-control").on("click", function(){
         $("header").toggleClass("account-config-open")
     })
