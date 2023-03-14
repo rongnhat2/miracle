@@ -167,10 +167,10 @@ const View = {
 	            .done(res => { 
 	                if (res.status == 200) {
 	                    View.Cart.response.success(res.message)
-	                    // localStorage.removeItem("miracle-card");
-	                    // localStorage.removeItem("miracle-item");
-	                    // localStorage.removeItem("miracle-quantity");
-	                    // localStorage.removeItem("miracle-checkout"); 
+	                    localStorage.removeItem("miracle-card");
+	                    localStorage.removeItem("miracle-item");
+	                    localStorage.removeItem("miracle-quantity");
+	                    localStorage.removeItem("miracle-checkout"); 
 	                    redirect_logined(res.data)
 	                }else{
 	                    View.Cart.response.error(res.message)
