@@ -3,9 +3,9 @@ const View = {
         __generateDTRow(data){
             return [
                 data.product_id,
-                data.product_name,
-                IndexView.table.formatNumber(data.quantity),
-                IndexView.table.formatNumber(data.product_prices) + `$`,
+                data.product_name ?? "[Product has been removed]",
+                data.quantity,
+                data.product_prices + `$`,
             ]
         },
         init(){
@@ -40,9 +40,9 @@ const View = {
             return [
                 data.id,   
                 data.branch_name,   
-                data.product_name,   
+                data.product_name ?? "[Product has been removed]",   
                 data.quantity,   
-                IndexView.table.formatNumber(data.prices) + ` đ`,
+                data.prices ?? "[Product has been removed]",
                 `<span class="badge badge-pill badge-${data.history_status == 1 ? "green" : "red"} m-r-5 m-b-5">${data.history_status == 1 ? "Nhập kho" : "Xuất kho"}</span>`,
                 `<div class="view-data modal-fs-control" style="cursor: pointer" atr="View" data-id="${data.id}"><i class="anticon anticon-eye"></i></div>`
             ]

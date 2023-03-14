@@ -50,4 +50,24 @@ class WarehouseRepository extends BaseRepository implements RepositoryInterface
     }
 
 
+
+    public function get_history_detail($id){
+        $sql_getall =   "SELECT *
+                            FROM warehouse_history_detail
+                            WHERE warehouse_history_id = ".$id;
+        return DB::select($sql_getall);
+    }
+
+    public function warehouse_get_item($item_id){
+        $sql_checkitem = "SELECT * FROM warehouse WHERE product_id = ".$item_id;
+        return DB::select($sql_checkitem);
+    }
+
+    public function update_item($item_id, $quantity){
+        $sql_checkitem = "UPDATE warehouse
+                            SET quantity =".$quantity." 
+                            WHERE product_id = ".$item_id;
+        DB::select($sql_checkitem);
+    }
+
 }

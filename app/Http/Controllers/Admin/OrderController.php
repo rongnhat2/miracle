@@ -62,13 +62,13 @@ class OrderController extends Controller
         $order_status   = $request->data_status;
         $message_user   = [
             "",
-            "Cửa hàng đang nhập hàng",
-            "Đã xác nhận đơn hàng",
-            "Đã chuẩn bị hàng - shipper đang lấy hàng", 
-            "Shipper đang vận chuyển",
-            "Đã nhận hàng",
-            "Đơn hàng kết thúc, cảm ơn bạn đã mua hàng",
-            "Đã hủy",
+            "The store is importing goods",
+            "Order confirmed",
+            "The shipper is picking up the goods", 
+            "Shipper is shipping",
+            "Has received the goods",
+            "The order has ended, thank you for your purchase",
+            "Cancelled",
         ];
         $order = $this->order->get_one($order_id);
         $order_message_array = explode(",",$order[0]->order_value);
@@ -83,13 +83,13 @@ class OrderController extends Controller
         }else if ($request->data_status == 3) {
             $data_sub = $this->order_detail->get_full_order($request->data_id);
             foreach ($data_sub as $key => $value) {
-                $warehouse_item = $this->warehouse->warehouse_get_item($value->product_id); 
+                $warehouse_item = $this->warehouse->warehouse_get_item($value->product_id);  
                 if (count($warehouse_item) > 0) {
                     $warehouse_quantity = $warehouse_item[0]->quantity;
-                    $warehouse_reserve  = $warehouse_item[0]->reserve;
+                    $warehouse_reserve  = $warehouse_item[0]->quantity;
                     $item_reserve       = $value->quantity;
                     if ($warehouse_quantity > $item_reserve) {
-                        $this->warehouse->update_item($value->product_id, $warehouse_quantity -= $item_reserve, $warehouse_reserve += $item_reserve);
+                        $this->warehouse->update_item($value->product_id, $warehouse_quantity -= $item_reserve);
                     }else{
                         return $this->order->send_response(500, null, "Hết sản phẩm");
                     }

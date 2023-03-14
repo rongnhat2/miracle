@@ -54,13 +54,13 @@ const View = {
 		},
 		render(data){
 			var order_status = [
-				"Chờ xác nhận",
-                "Chưa hoàn thiện",
-                "Đã hoàn thiện",
-				"Đang lấy hàng",
-				"Đang giao hàng",
-				"Đã giao hàng",
-				"Đã hủy",
+				"pending",
+				"pending",
+				"fulfill",
+				"fulfill",
+				"shipping",
+				"shiped",
+				"cancel",
 			];
 			var order_status_text = [
 				"pending",
@@ -75,10 +75,10 @@ const View = {
 			data.map((v, k) => {
                 var sub_order = "";
                 v.order_detail.map((v1,k1) => {
-                	var image           = v1.images.split(",")[0];
-                	var real_prices     = ViewIndex.Config.formatPrices(v1.total_price);
-                	var total_discount  = v1.discount == 0 ? "" : `<p style="margin: 0 0 0 0 ">- ${ViewIndex.Config.formatPrices(v1.discount)} đ</p>`
-                	var discount_price  = v1.discount == 0 ? "" : `<del>${ViewIndex.Config.formatPrices(v1.prices)} đ X ${v1.quantity} = ${ViewIndex.Config.formatPrices(v1.prices*v1.quantity)}</del>`
+                	var image           = v1.image;
+                	var real_prices     = IndexView.Config.formatPrices(v1.total_price);
+                	var total_discount  = v1.discount == 0 ? "" : `<p style="margin: 0 0 0 0 ">- ${IndexView.Config.formatPrices(v1.discount)} $</p>`
+                	var discount_price  = v1.discount == 0 ? "" : `<del>${IndexView.Config.formatPrices(v1.prices)} $ X ${v1.quantity} = ${IndexView.Config.formatPrices(v1.prices*v1.quantity)}</del>`
                 	sub_order += `<div class="order-item">
 									<div class="item-image" style="background-image: url('${image}')"> </div>
 									<div class="item-data">
@@ -88,7 +88,7 @@ const View = {
 									<div class="item-price">
 										${discount_price}
 										${total_discount}
-										<span>${real_prices} đ</span>
+										<span>${real_prices} $</span>
 									</div>
 								</div>`
                 })
@@ -103,7 +103,7 @@ const View = {
 								${sub_order}
 							</div>
 							<div class="order-footer">
-								Tổng số tiền: <span>${ViewIndex.Config.formatPrices(v.order.total)} đ</span>
+								Total: <span>${IndexView.Config.formatPrices(v.order.total)} $</span>
 							</div>
 						</div>
 					`)
@@ -111,13 +111,13 @@ const View = {
 		},
 		render_sub(id){
 			var order_status = [
-				"Chờ xác nhận",
-                "Chưa hoàn thiện",
-                "Đã hoàn thiện",
-				"Đang lấy hàng",
-				"Đang giao hàng",
-				"Đã giao hàng",
-				"Đã hủy",
+				"pending",
+				"pending",
+				"fulfill",
+				"fulfill",
+				"shipping",
+				"shiped",
+				"cancel",
 			];
 			var order_status_text = [
 				"pending",
@@ -130,12 +130,12 @@ const View = {
 			];
 			var payment = [
 				"",
-				"Thanh toán khi nhận hàng",
-				"Thanh toán online",
+				"COD",
+				"Online banking",
 			];
 			var payment_status = [
-				"Chưa thanh toán",
-				"Đã thanh toán",
+				"Unpaid",
+				"Paid",
 			];
 			var resource = $(".order-tab-wrapper")
 			var data = View.Order.data[id];
@@ -162,8 +162,8 @@ const View = {
 			var sub_order = "";
             data.order_detail.map((v1,k1) => {
             	var image           = v1.images.split(",")[0];
-            	var real_prices     = ViewIndex.Config.formatPrices(v1.discount == 0 ? v1.prices : v1.prices - (v1.prices*v1.discount/100));
-            	var discount_price  = v1.discount == 0 ? "" : `<del>${ViewIndex.Config.formatPrices(v1.prices*v1.discount/100)} đ</del>`
+            	var real_prices     = IndexView.Config.formatPrices(v1.discount == 0 ? v1.prices : v1.prices - (v1.prices*v1.discount/100));
+            	var discount_price  = v1.discount == 0 ? "" : `<del>${IndexView.Config.formatPrices(v1.prices*v1.discount/100)} đ</del>`
             	sub_order += `<div class="order-item">
 								<div class="item-image" style="background-image: url('${image}')"> </div>
 								<div class="item-data">
@@ -185,7 +185,7 @@ const View = {
 								${sub_order}
 							</div>
 							<div class="order-footer">
-								Tổng số tiền: <span>${ViewIndex.Config.formatPrices(data.order.total)} đ</span>
+								Tổng số tiền: <span>${IndexView.Config.formatPrices(data.order.total)} đ</span>
 							</div>`);
 			
 
@@ -398,7 +398,7 @@ const View = {
 (() => {
     View.init();
     function init(){
-    	getProfile();
+    	// getProfile();
     	getOrder( )
     }
     async function redirect_logined(url) {
